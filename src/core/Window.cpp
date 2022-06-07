@@ -16,7 +16,7 @@ namespace Core
         delete _wndPtr;
     }
 
-    void Window::exec()
+    void Window::start()
     {
         if (!_wndPtr) {
             // TODO: Assert

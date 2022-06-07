@@ -20,7 +20,7 @@ namespace Core
         void create(std::string_view title, unsigned width, unsigned height, unsigned framerateMax);
         void destroy();
 
-        void exec();
+        void start();
 
     private:
         sf::RenderWindow* _wndPtr = nullptr;

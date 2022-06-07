@@ -1,10 +1,8 @@
-#include <core/Window.hpp>
+#include <core/Application.hpp>
 
 int main()
 {
-    Core::Window window;
-    window.create("Capture the Base", 800, 600, 60);
-    window.exec();
-    window.destroy();
+    Core::Application app;
+    app.exec();
     return 0;
 }
