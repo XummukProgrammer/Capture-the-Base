@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <iostream>
+
 namespace Core
 {
     void Application::exec()

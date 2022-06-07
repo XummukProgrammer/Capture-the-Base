@@ -33,7 +33,12 @@ namespace Core
             return;
         }
 
+        sf::Clock clock;
+
         while (_wndPtr->isOpen()) {
+            sf::Time deltaTime = clock.getElapsedTime();
+            clock.restart();
+
             sf::Event event;
             while (_wndPtr->pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
@@ -41,7 +46,7 @@ namespace Core
                 }
             }
 
-            onUpdate();
+            onUpdate(deltaTime.asSeconds());
 
             _wndPtr->clear();
             onDraw();
@@ -49,10 +54,10 @@ namespace Core
         }
     }
 
-    void Window::onUpdate()
+    void Window::onUpdate(float deltaTime)
     {
         if (_onUpdateCallback) {
-            _onUpdateCallback(0.f);
+            _onUpdateCallback(deltaTime);
         }
     }
 

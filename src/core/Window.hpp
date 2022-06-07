@@ -31,7 +31,7 @@ namespace Core
         void start();
 
     private:
-        void onUpdate();
+        void onUpdate(float deltaTime);
         void onDraw();
 
     private:
