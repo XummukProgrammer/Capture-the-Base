@@ -1,6 +1,8 @@
 #ifndef __ASSET_INCLUDE_FILE__
 #define __ASSET_INCLUDE_FILE__
 
+#include "Factory.hpp"
+
 #include <SFML/Graphics.hpp>
 
 #include <pugixml.hpp>
@@ -9,7 +11,7 @@
 
 namespace Core
 {
-    class Asset
+    class Asset : public Factorable
     {
     public:
         using OriginType = Asset;

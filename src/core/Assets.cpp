@@ -1,6 +1,7 @@
 #include "Assets.hpp"
 
 #include "Application.hpp"
+#include "Factory.hpp"
 
 #include <pugixml.hpp>
 
@@ -21,17 +22,12 @@ namespace Core
             const std::string assetType = assetNode.attribute("type").as_string();
             const std::string assetId = assetNode.attribute("type").as_string();
 
-            std::unique_ptr<Asset> asset;
-
-            if (assetType == "AssetTexture")
+            if (auto&& factorable = Application::getInstance().getFactory()->createType(assetType))
             {
-                asset = std::make_unique<AssetTexture>();
-            }
-
-            if (asset)
-            {
-                asset->loadFromFile(assetNode);
-                addAsset(assetId, std::move(asset));
+                if (auto asset = std::dynamic_pointer_cast<Asset>(factorable)) {
+                    asset->loadFromFile(assetNode);
+                    addAsset(assetId, std::move(asset));
+                }
             }
         }
     }

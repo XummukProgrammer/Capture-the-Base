@@ -2,6 +2,7 @@
 
 #include "Window.hpp"
 #include "Assets.hpp"
+#include "Factory.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -23,6 +24,7 @@ namespace Core
     void Application::init(int argc, char* argv[])
     {
         initExecuteDir(argc, argv);
+        initFactory();
         initAssets();
         initWindow();
     }
@@ -31,6 +33,7 @@ namespace Core
     {
         destroyWindow();
         destroyAssets();
+        destroyFactory();
     }
 
     void Application::start()
@@ -46,7 +49,7 @@ namespace Core
     void Application::initExecuteDir(int argc, char* argv[])
     {
         const std::string executePath = std::string(argv[0]);
-        _executeDir = executePath.substr(0, executePath.find_last_of("\\")) + "/../../";
+        _executeDir = executePath.substr(0, executePath.find_last_of("\\"));
     }
 
     void Application::initWindow()
@@ -75,6 +78,17 @@ namespace Core
         delete _assetsPtr;
     }
 
+    void Application::initFactory()
+    {
+        _factoryPtr = new Factory;
+        _factoryPtr->registerType<AssetTexture>("AssetTexture");
+    }
+
+    void Application::destroyFactory()
+    {
+        delete _factoryPtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
     }
@@ -91,6 +105,26 @@ namespace Core
 
     std::string Application::buildPath(std::string_view filePath) const
     {
-        return _executeDir + std::string{filePath};
+        return _executeDir + "/../../" + std::string{filePath};
+    }
+
+    Window* Application::getWindow() const
+    {
+        return _wndPtr;
+    }
+
+    Assets* Application::getAssets() const
+    {
+        return _assetsPtr;
+    }
+
+    Factory* Application::getFactory() const
+    {
+        return _factoryPtr;
+    }
+
+    const std::string& Application::getExecuteDir() const
+    {
+        return _executeDir;
     }
 }

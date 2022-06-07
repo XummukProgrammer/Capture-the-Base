@@ -12,6 +12,7 @@ namespace Core
 {
     class Window;
     class Assets;
+    class Factory;
 
     class Application final
     {
@@ -28,6 +29,11 @@ namespace Core
     public:
         std::string buildPath(std::string_view filePath) const;
 
+        Window* getWindow() const;
+        Assets* getAssets() const;
+        Factory* getFactory() const;
+        const std::string& getExecuteDir() const;
+
     private:
         void init(int argc, char* argv[]);
         void deinit();
@@ -42,6 +48,9 @@ namespace Core
         void initAssets();
         void destroyAssets();
 
+        void initFactory();
+        void destroyFactory();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
@@ -49,6 +58,7 @@ namespace Core
     private:
         Window* _wndPtr = nullptr;
         Assets* _assetsPtr = nullptr;
+        Factory* _factoryPtr = nullptr;
         std::string _executeDir;
     };
 }

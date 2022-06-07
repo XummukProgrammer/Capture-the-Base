@@ -13,7 +13,7 @@ namespace Core
     class Assets final
     {
     public:
-        using AssetPtr = std::unique_ptr<Asset>;
+        using AssetPtr = std::shared_ptr<Asset>;
 
     public:
         Assets() = default;
@@ -34,7 +34,7 @@ namespace Core
     {
         auto it = _assets.find(std::string{id});
         if (it != _assets.end()) {
-            if (auto castedAsset = dynamic_cast<T*>(it->second.get())) {
+            if (auto castedAsset = std::dynamic_pointer_cast<T>(it->second)) {
                 return castedAsset->getData();
             }
         }
