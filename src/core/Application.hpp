@@ -17,6 +17,9 @@ namespace Core
         ~Application() = default;
 
     public:
+        static Application& getInstance();
+
+    public:
         void exec();
 
     private:

@@ -8,6 +8,12 @@
 
 namespace Core
 {
+    Application& Application::getInstance()
+    {
+        static Application app{};
+        return app;
+    }
+
     void Application::exec()
     {
         init();
