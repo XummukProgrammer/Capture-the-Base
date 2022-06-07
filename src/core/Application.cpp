@@ -13,15 +13,16 @@ namespace Core
         return app;
     }
 
-    void Application::exec()
+    void Application::exec(int argc, char* argv[])
     {
-        init();
+        init(argc, argv);
         start();
         deinit();
     }
 
-    void Application::init()
+    void Application::init(int argc, char* argv[])
     {
+        initExecuteDir(argc, argv);
         initAssets();
         initWindow();
     }
@@ -42,6 +43,12 @@ namespace Core
         _wndPtr->start();
     }
 
+    void Application::initExecuteDir(int argc, char* argv[])
+    {
+        const std::string executePath = std::string(argv[0]);
+        _executeDir = executePath.substr(0, executePath.find_last_of("\\")) + "/../../";
+    }
+
     void Application::initWindow()
     {
         _wndPtr = new Window();
@@ -60,10 +67,7 @@ namespace Core
     void Application::initAssets()
     {
         _assetsPtr = new Assets;
-
-        auto assetTexturePtr = std::make_unique<AssetTexture>();
-        assetTexturePtr->loadFromFile("test.png");
-        _assetsPtr->addAsset("test", std::move(assetTexturePtr));
+        _assetsPtr->loadFromFile("assets/Assets.xml");
     }
 
     void Application::destroyAssets()
@@ -83,5 +87,10 @@ namespace Core
             sprite.setTextureRect({ 0, 0, 32, 32 });
             wndPtr->draw(sprite);
         }
+    }
+
+    std::string Application::buildPath(std::string_view filePath) const
+    {
+        return _executeDir + std::string{filePath};
     }
 }

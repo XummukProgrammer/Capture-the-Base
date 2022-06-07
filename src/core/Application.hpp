@@ -1,6 +1,8 @@
 #ifndef __APPLICATION_INCLUDE_FILE__
 #define __APPLICATION_INCLUDE_FILE__
 
+#include <string>
+
 namespace sf
 {
     class RenderWindow;
@@ -21,13 +23,18 @@ namespace Core
         static Application& getInstance();
 
     public:
-        void exec();
+        void exec(int argc, char* argv[]);
+
+    public:
+        std::string buildPath(std::string_view filePath) const;
 
     private:
-        void init();
+        void init(int argc, char* argv[]);
         void deinit();
 
         void start();
+
+        void initExecuteDir(int argc, char* argv[]);
 
         void initWindow();
         void destroyWindow();
@@ -42,8 +49,8 @@ namespace Core
     private:
         Window* _wndPtr = nullptr;
         Assets* _assetsPtr = nullptr;
+        std::string _executeDir;
     };
-
 }
 
 #endif // __APPLICATION_INCLUDE_FILE__

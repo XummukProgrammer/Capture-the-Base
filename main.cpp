@@ -1,8 +1,8 @@
 #include <core/Application.hpp>
 
-int main()
+int main(int argc, char* argv[])
 {
     auto& app = Core::Application::getInstance();
-    app.exec();
+    app.exec(argc, argv);
     return 0;
 }

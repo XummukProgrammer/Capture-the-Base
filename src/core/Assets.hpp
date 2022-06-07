@@ -20,6 +20,8 @@ namespace Core
         ~Assets() = default;
 
     public:
+        void loadFromFile(std::string_view filePath);
+
         void addAsset(std::string_view id, AssetPtr&& asset);
         template<typename T> typename T::OriginType* getAsset(std::string_view id) const;
 

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <pugixml.hpp>
+
 #include <memory>
 
 namespace Core
@@ -15,6 +17,9 @@ namespace Core
     public:
         Asset() = default;
         virtual ~Asset() = default;
+
+    public:
+        virtual void loadFromFile(pugi::xml_node& node) = 0;
     };
 
     template<typename T>
@@ -55,6 +60,7 @@ namespace Core
         ~AssetTexture() = default;
 
     public:
+        void loadFromFile(pugi::xml_node& node);
         void loadFromFile(std::string_view filePath);
     };
 }
