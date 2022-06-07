@@ -1,10 +1,9 @@
 #include "Application.hpp"
 
 #include "Window.hpp"
+#include "Assets.hpp"
 
 #include <SFML/Graphics.hpp>
-
-#include <iostream>
 
 namespace Core
 {
@@ -23,12 +22,14 @@ namespace Core
 
     void Application::init()
     {
+        initAssets();
         initWindow();
     }
 
     void Application::deinit()
     {
         destroyWindow();
+        destroyAssets();
     }
 
     void Application::start()
@@ -56,11 +57,31 @@ namespace Core
         delete _wndPtr;
     }
 
+    void Application::initAssets()
+    {
+        _assetsPtr = new Assets;
+
+        auto assetTexturePtr = std::make_unique<AssetTexture>();
+        assetTexturePtr->loadFromFile("test.png");
+        _assetsPtr->addAsset("test", std::move(assetTexturePtr));
+    }
+
+    void Application::destroyAssets()
+    {
+        delete _assetsPtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
     }
 
     void Application::onDraw(sf::RenderWindow* wndPtr)
     {
+        if (auto* asset = _assetsPtr->getAsset<AssetTexture>("test")) {
+            sf::Sprite sprite;
+            sprite.setTexture(*asset);
+            sprite.setTextureRect({ 0, 0, 32, 32 });
+            wndPtr->draw(sprite);
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace sf
 namespace Core
 {
     class Window;
+    class Assets;
 
     class Application final
     {
@@ -31,12 +32,16 @@ namespace Core
         void initWindow();
         void destroyWindow();
 
+        void initAssets();
+        void destroyAssets();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
 
     private:
         Window* _wndPtr = nullptr;
+        Assets* _assetsPtr = nullptr;
     };
 
 }

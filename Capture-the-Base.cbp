@@ -35,6 +35,10 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/core/Application.cpp" />
 		<Unit filename="src/core/Application.hpp" />
+		<Unit filename="src/core/Asset.cpp" />
+		<Unit filename="src/core/Asset.hpp" />
+		<Unit filename="src/core/Assets.cpp" />
+		<Unit filename="src/core/Assets.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
 		<Extensions />
