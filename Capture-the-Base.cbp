@@ -33,6 +33,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
+		<Unit filename="src/core/Application.cpp" />
+		<Unit filename="src/core/Application.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
 		<Extensions />

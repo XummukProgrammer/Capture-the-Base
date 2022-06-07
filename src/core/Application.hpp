@@ -1,6 +1,11 @@
 #ifndef __APPLICATION_INCLUDE_FILE__
 #define __APPLICATION_INCLUDE_FILE__
 
+namespace sf
+{
+    class RenderWindow;
+}
+
 namespace Core
 {
     class Window;
@@ -22,6 +27,10 @@ namespace Core
 
         void initWindow();
         void destroyWindow();
+
+    private:
+        void onUpdate(float deltaTime);
+        void onDraw(sf::RenderWindow* wndPtr);
 
     private:
         Window* _wndPtr = nullptr;

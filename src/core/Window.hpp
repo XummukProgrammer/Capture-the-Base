@@ -2,6 +2,7 @@
 #define __WINDOW_INCLUDE_FILE__
 
 #include <string>
+#include <functional>
 
 namespace sf
 {
@@ -13,6 +14,10 @@ namespace Core
     class Window final
     {
     public:
+        using UpdateCallback = std::function<void(float)>;
+        using DrawCallback = std::function<void(sf::RenderWindow* window)>;
+
+    public:
         Window() = default;
         ~Window() = default;
 
@@ -20,10 +25,19 @@ namespace Core
         void create(std::string_view title, unsigned width, unsigned height, unsigned framerateMax);
         void destroy();
 
+        void setOnUpdateCallback(const UpdateCallback& callback);
+        void setOnDrawCallback(const DrawCallback& callback);
+
         void start();
 
     private:
+        void onUpdate();
+        void onDraw();
+
+    private:
         sf::RenderWindow* _wndPtr = nullptr;
+        UpdateCallback _onUpdateCallback;
+        DrawCallback _onDrawCallback;
     };
 }
 

@@ -2,6 +2,8 @@
 
 #include "Window.hpp"
 
+#include <SFML/Graphics.hpp>
+
 namespace Core
 {
     void Application::exec()
@@ -35,6 +37,8 @@ namespace Core
     {
         _wndPtr = new Window();
         _wndPtr->create("Capture the Base", 800, 600, 60);
+        _wndPtr->setOnUpdateCallback(std::bind(&Application::onUpdate, this, std::placeholders::_1));
+        _wndPtr->setOnDrawCallback(std::bind(&Application::onDraw, this, std::placeholders::_1));
 
     }
 
@@ -42,5 +46,13 @@ namespace Core
     {
         _wndPtr->destroy();
         delete _wndPtr;
+    }
+
+    void Application::onUpdate(float deltaTime)
+    {
+    }
+
+    void Application::onDraw(sf::RenderWindow* wndPtr)
+    {
     }
 }

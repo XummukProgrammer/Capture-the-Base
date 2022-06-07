@@ -16,6 +16,16 @@ namespace Core
         delete _wndPtr;
     }
 
+    void Window::setOnUpdateCallback(const UpdateCallback& callback)
+    {
+        _onUpdateCallback = callback;
+    }
+
+    void Window::setOnDrawCallback(const DrawCallback& callback)
+    {
+        _onDrawCallback = callback;
+    }
+
     void Window::start()
     {
         if (!_wndPtr) {
@@ -31,8 +41,25 @@ namespace Core
                 }
             }
 
+            onUpdate();
+
             _wndPtr->clear();
+            onDraw();
             _wndPtr->display();
+        }
+    }
+
+    void Window::onUpdate()
+    {
+        if (_onUpdateCallback) {
+            _onUpdateCallback(0.f);
+        }
+    }
+
+    void Window::onDraw()
+    {
+        if (_onDrawCallback) {
+            _onDrawCallback(_wndPtr);
         }
     }
 }
