@@ -13,6 +13,7 @@ namespace Core
     class Window;
     class Assets;
     class Factory;
+    class States;
 
     class Application final
     {
@@ -32,6 +33,7 @@ namespace Core
         Window* getWindow() const;
         Assets* getAssets() const;
         Factory* getFactory() const;
+        States* getStates() const;
         const std::string& getExecuteDir() const;
 
     private:
@@ -51,6 +53,9 @@ namespace Core
         void initFactory();
         void destroyFactory();
 
+        void initStates();
+        void destroyStates();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
@@ -59,6 +64,7 @@ namespace Core
         Window* _wndPtr = nullptr;
         Assets* _assetsPtr = nullptr;
         Factory* _factoryPtr = nullptr;
+        States* _statesPtr = nullptr;
         std::string _executeDir;
     };
 }

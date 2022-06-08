@@ -3,6 +3,9 @@
 #include "Window.hpp"
 #include "Assets.hpp"
 #include "Factory.hpp"
+#include "States.hpp"
+
+#include <game/GameState.hpp>
 
 #include <SFML/Graphics.hpp>
 
@@ -27,6 +30,7 @@ namespace Core
         initFactory();
         initAssets();
         initWindow();
+        initStates();
     }
 
     void Application::deinit()
@@ -34,15 +38,11 @@ namespace Core
         destroyWindow();
         destroyAssets();
         destroyFactory();
+        destroyStates();
     }
 
     void Application::start()
     {
-        if (!_wndPtr) {
-            // TODO: Assert
-            return;
-        }
-
         _wndPtr->start();
     }
 
@@ -89,8 +89,24 @@ namespace Core
         delete _factoryPtr;
     }
 
+    void Application::initStates()
+    {
+        _statesPtr = new States;
+
+        auto gameState = std::make_unique<Game::GameState>();
+        _statesPtr->addState("GameState", std::move(gameState));
+
+        _statesPtr->setCurrentState("GameState");
+    }
+
+    void Application::destroyStates()
+    {
+        delete _statesPtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
+        _statesPtr->onUpdate(deltaTime);
     }
 
     void Application::onDraw(sf::RenderWindow* wndPtr)
@@ -121,6 +137,11 @@ namespace Core
     Factory* Application::getFactory() const
     {
         return _factoryPtr;
+    }
+
+    States* Application::getStates() const
+    {
+        return _statesPtr;
     }
 
     const std::string& Application::getExecuteDir() const

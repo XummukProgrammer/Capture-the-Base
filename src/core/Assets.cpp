@@ -20,7 +20,7 @@ namespace Core
 
         for (auto assetNode = assetsNode.child("Asset"); assetNode; assetNode = assetNode.next_sibling("Asset")) {
             const std::string assetType = assetNode.attribute("type").as_string();
-            const std::string assetId = assetNode.attribute("type").as_string();
+            const std::string assetId = assetNode.attribute("id").as_string();
 
             if (auto&& factorable = Application::getInstance().getFactory()->createType(assetType))
             {

@@ -43,8 +43,14 @@
 		<Unit filename="src/core/Assets.hpp" />
 		<Unit filename="src/core/Factory.cpp" />
 		<Unit filename="src/core/Factory.hpp" />
+		<Unit filename="src/core/State.cpp" />
+		<Unit filename="src/core/State.hpp" />
+		<Unit filename="src/core/States.cpp" />
+		<Unit filename="src/core/States.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
+		<Unit filename="src/game/GameState.cpp" />
+		<Unit filename="src/game/GameState.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
