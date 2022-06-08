@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="libs/fmt/src/format.cc" />
 		<Unit filename="libs/pugixml/src/pugixml.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/core/Application.cpp" />
