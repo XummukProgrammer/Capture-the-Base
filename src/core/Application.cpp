@@ -5,8 +5,6 @@
 #include "Factory.hpp"
 #include "States.hpp"
 
-#include <game/GameState.hpp>
-
 #include <SFML/Graphics.hpp>
 
 namespace Core
@@ -59,6 +57,8 @@ namespace Core
         _wndPtr->setOnUpdateCallback(std::bind(&Application::onUpdate, this, std::placeholders::_1));
         _wndPtr->setOnDrawCallback(std::bind(&Application::onDraw, this, std::placeholders::_1));
 
+        getDelegate()->onInitWindow(_wndPtr);
+
     }
 
     void Application::destroyWindow()
@@ -71,6 +71,8 @@ namespace Core
     {
         _assetsPtr = new Assets;
         _assetsPtr->loadFromFile("assets/Assets.xml");
+
+        getDelegate()->onInitAssets(_assetsPtr);
     }
 
     void Application::destroyAssets()
@@ -82,6 +84,8 @@ namespace Core
     {
         _factoryPtr = new Factory;
         _factoryPtr->registerType<AssetTexture>("AssetTexture");
+
+        getDelegate()->onInitFactory(_factoryPtr);
     }
 
     void Application::destroyFactory()
@@ -93,10 +97,7 @@ namespace Core
     {
         _statesPtr = new States;
 
-        auto gameState = std::make_unique<Game::GameState>();
-        _statesPtr->addState("GameState", std::move(gameState));
-
-        _statesPtr->setCurrentState("GameState");
+        getDelegate()->onInitStates(_statesPtr);
     }
 
     void Application::destroyStates()
@@ -107,6 +108,8 @@ namespace Core
     void Application::onUpdate(float deltaTime)
     {
         _statesPtr->onUpdate(deltaTime);
+
+        getDelegate()->onUpdate(deltaTime);
     }
 
     void Application::onDraw(sf::RenderWindow* wndPtr)
@@ -117,6 +120,8 @@ namespace Core
             sprite.setTextureRect({ 0, 0, 32, 32 });
             wndPtr->draw(sprite);
         }
+
+        getDelegate()->onDraw(wndPtr);
     }
 
     std::string Application::buildPath(std::string_view filePath) const

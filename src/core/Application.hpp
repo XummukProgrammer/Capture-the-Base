@@ -15,6 +15,22 @@ namespace Core
     class Factory;
     class States;
 
+    class ApplicationDelegate
+    {
+    public:
+        ApplicationDelegate() = default;
+        virtual ~ApplicationDelegate() = default;
+
+    public:
+        virtual void onInitWindow(Window* wndPtr) {}
+        virtual void onInitAssets(Assets* assetsPtr) {}
+        virtual void onInitFactory(Factory* factoryPtr) {}
+        virtual void onInitStates(States* statesPtr) {}
+
+        virtual void onUpdate(float deltaTime) {}
+        virtual void onDraw(sf::RenderWindow* wndPtr) {}
+    };
+
     class Application final
     {
     public:
@@ -23,6 +39,7 @@ namespace Core
 
     public:
         static Application& getInstance();
+        static ApplicationDelegate* getDelegate(); // Impl from game project
 
     public:
         void exec(int argc, char* argv[]);
