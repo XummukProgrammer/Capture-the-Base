@@ -49,6 +49,8 @@
 		<Unit filename="src/core/States.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
+		<Unit filename="src/game/GameApplicationDelegate.cpp" />
+		<Unit filename="src/game/GameApplicationDelegate.hpp" />
 		<Unit filename="src/game/GameState.cpp" />
 		<Unit filename="src/game/GameState.hpp" />
 		<Extensions />
