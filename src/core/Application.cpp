@@ -130,17 +130,21 @@ namespace Core
 
     void Application::initECSWorld()
     {
+        _ecsWorldPtr->create();
+
         getDelegate()->onInitECSWorld(_ecsWorldPtr);
     }
 
     void Application::destroyECSWorld()
     {
+        _ecsWorldPtr->destroy();
         delete _ecsWorldPtr;
     }
 
     void Application::onUpdate(float deltaTime)
     {
         _statesPtr->onUpdate(deltaTime);
+        _ecsWorldPtr->onUpdate(deltaTime);
         _renderVisualObjectsPtr->onUpdate(deltaTime);
 
         getDelegate()->onUpdate(deltaTime);

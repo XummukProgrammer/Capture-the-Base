@@ -5,7 +5,9 @@
 
 #include <game/GameState.hpp>
 
+#include <ecs/ECSWorld.hpp>
 #include <ecs/utils/RenderVisualObjectsECSUtils.hpp>
+#include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 
 namespace Game
 {
@@ -19,9 +21,8 @@ namespace Game
 
     void GameApplicationDelegate::onInitECSWorld(ECS::World* worldPtr)
     {
-        entt::entity test1 = ECS::RenderVisualObjectsECSUtils::createVisualObject("test");
+        worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
 
-        entt::entity test2 = ECS::RenderVisualObjectsECSUtils::createVisualObject("test2");
-        ECS::RenderVisualObjectsECSUtils::removeVisualObject(test2);
+        entt::entity test1 = ECS::RenderVisualObjectsECSUtils::createVisualObject("test", 0, { 50.f, 50.f }, { 0.5f, 0.5f }, 60.f);
     }
 }

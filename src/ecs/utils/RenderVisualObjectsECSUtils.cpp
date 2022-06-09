@@ -10,9 +10,10 @@
 
 namespace ECS
 {
-    entt::entity RenderVisualObjectsECSUtils::createVisualObject(std::string_view assetId, int layerId)
+    entt::entity RenderVisualObjectsECSUtils::createVisualObject(std::string_view assetId, int layerId,
+        const sf::Vector2f& position, const sf::Vector2f& scale, float rotation)
     {
-        return ECS::createVisualObject(assetId, layerId);
+        return ECS::createVisualObject(assetId, layerId, position, scale, rotation);
     }
 
     void RenderVisualObjectsECSUtils::moveVisualObject(entt::entity entity, int newLayerId)

@@ -55,8 +55,16 @@
 		<Unit filename="src/core/Window.hpp" />
 		<Unit filename="src/ecs/ECSWorld.cpp" />
 		<Unit filename="src/ecs/ECSWorld.hpp" />
+		<Unit filename="src/ecs/components/TransformComponent.cpp" />
+		<Unit filename="src/ecs/components/TransformComponent.hpp" />
 		<Unit filename="src/ecs/components/VisualObjectComponent.cpp" />
 		<Unit filename="src/ecs/components/VisualObjectComponent.hpp" />
+		<Unit filename="src/ecs/systems/System.cpp" />
+		<Unit filename="src/ecs/systems/System.hpp" />
+		<Unit filename="src/ecs/systems/Systems.cpp" />
+		<Unit filename="src/ecs/systems/Systems.hpp" />
+		<Unit filename="src/ecs/systems/UpdateVisualObjectsSystem.cpp" />
+		<Unit filename="src/ecs/systems/UpdateVisualObjectsSystem.hpp" />
 		<Unit filename="src/ecs/utils/ECSFactoryObjects.cpp" />
 		<Unit filename="src/ecs/utils/ECSFactoryObjects.hpp" />
 		<Unit filename="src/ecs/utils/RenderVisualObjectsECSUtils.cpp" />
