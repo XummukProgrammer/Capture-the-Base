@@ -8,6 +8,11 @@ namespace sf
     class RenderWindow;
 }
 
+namespace ECS
+{
+    class World;
+}
+
 namespace Core
 {
     class Window;
@@ -28,6 +33,7 @@ namespace Core
         virtual void onInitFactory(Factory* factoryPtr) {}
         virtual void onInitStates(States* statesPtr) {}
         virtual void onInitRenderVisualObjects(RenderVisualObjects* renderVisualObjectsPtr) {}
+        virtual void onInitECSWorld(ECS::World* worldPtr) {}
 
         virtual void onUpdate(float deltaTime) {}
         virtual void onDraw(sf::RenderWindow* wndPtr) {}
@@ -55,6 +61,7 @@ namespace Core
         Factory* getFactory() const;
         States* getStates() const;
         RenderVisualObjects* getRenderVisualObjects() const;
+        ECS::World* getECSWorld() const;
         const std::string& getExecuteDir() const;
 
     private:
@@ -80,6 +87,9 @@ namespace Core
         void initRenderVisualObjects();
         void destroyRenderVisualObjects();
 
+        void initECSWorld();
+        void destroyECSWorld();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
@@ -90,6 +100,7 @@ namespace Core
         Factory* _factoryPtr = nullptr;
         States* _statesPtr = nullptr;
         RenderVisualObjects* _renderVisualObjectsPtr = nullptr;
+        ECS::World* _ecsWorldPtr = nullptr;
         std::string _executeDir;
     };
 }

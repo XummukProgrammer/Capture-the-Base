@@ -13,7 +13,7 @@ namespace Game
 
     public:
         void onInitStates(Core::States* statesPtr) override;
-        void onInitRenderVisualObjects(Core::RenderVisualObjects* renderVisualObjectsPtr) override;
+        void onInitECSWorld(ECS::World* worldPtr) override;
     };
 }
 

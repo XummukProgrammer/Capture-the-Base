@@ -6,6 +6,8 @@
 #include "States.hpp"
 #include "RenderVisualObjects.hpp"
 
+#include <ecs/ECSWorld.hpp>
+
 #include <SFML/Graphics.hpp>
 
 namespace Core
@@ -16,6 +18,7 @@ namespace Core
         , _factoryPtr(new Factory)
         , _statesPtr(new States)
         , _renderVisualObjectsPtr(new RenderVisualObjects)
+        , _ecsWorldPtr(new ECS::World)
     {
 
     }
@@ -41,10 +44,12 @@ namespace Core
         initRenderVisualObjects();
         initWindow();
         initStates();
+        initECSWorld();
     }
 
     void Application::deinit()
     {
+        destroyECSWorld();
         destroyRenderVisualObjects();
         destroyWindow();
         destroyAssets();
@@ -123,6 +128,16 @@ namespace Core
         delete _renderVisualObjectsPtr;
     }
 
+    void Application::initECSWorld()
+    {
+        getDelegate()->onInitECSWorld(_ecsWorldPtr);
+    }
+
+    void Application::destroyECSWorld()
+    {
+        delete _ecsWorldPtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
         _statesPtr->onUpdate(deltaTime);
@@ -171,6 +186,11 @@ namespace Core
     RenderVisualObjects* Application::getRenderVisualObjects() const
     {
         return _renderVisualObjectsPtr;
+    }
+
+    ECS::World* Application::getECSWorld() const
+    {
+        return _ecsWorldPtr;
     }
 
     const std::string& Application::getExecuteDir() const

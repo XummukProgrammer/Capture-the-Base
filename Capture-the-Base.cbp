@@ -53,6 +53,14 @@
 		<Unit filename="src/core/VisualObject.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
+		<Unit filename="src/ecs/ECSWorld.cpp" />
+		<Unit filename="src/ecs/ECSWorld.hpp" />
+		<Unit filename="src/ecs/components/VisualObjectComponent.cpp" />
+		<Unit filename="src/ecs/components/VisualObjectComponent.hpp" />
+		<Unit filename="src/ecs/utils/ECSFactoryObjects.cpp" />
+		<Unit filename="src/ecs/utils/ECSFactoryObjects.hpp" />
+		<Unit filename="src/ecs/utils/RenderVisualObjectsECSUtils.cpp" />
+		<Unit filename="src/ecs/utils/RenderVisualObjectsECSUtils.hpp" />
 		<Unit filename="src/game/GameApplicationDelegate.cpp" />
 		<Unit filename="src/game/GameApplicationDelegate.hpp" />
 		<Unit filename="src/game/GameState.cpp" />

@@ -5,6 +5,8 @@
 
 #include <game/GameState.hpp>
 
+#include <ecs/utils/ECSFactoryObjects.hpp>
+
 namespace Game
 {
     void GameApplicationDelegate::onInitStates(Core::States* statesPtr)
@@ -15,19 +17,9 @@ namespace Game
         statesPtr->setCurrentState("GameState");
     }
 
-    void GameApplicationDelegate::onInitRenderVisualObjects(Core::RenderVisualObjects* renderVisualObjectsPtr)
+    void GameApplicationDelegate::onInitECSWorld(ECS::World* worldPtr)
     {
-        {
-            auto visualObject = std::make_shared<Core::VisualObject>();
-            visualObject->loadFromAsset("test");
-            renderVisualObjectsPtr->addVisualObject(visualObject, 1);
-        }
-
-        {
-            auto visualObject = std::make_shared<Core::VisualObject>();
-            visualObject->loadFromAsset("test2");
-            renderVisualObjectsPtr->addVisualObject(visualObject);
-            renderVisualObjectsPtr->moveVisualObject(visualObject, 2);
-        }
+        ECS::createVisualObject("test");
+        ECS::createVisualObject("test2");
     }
 }
