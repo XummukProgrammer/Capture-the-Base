@@ -14,6 +14,9 @@ namespace Core
         ~VisualObject() = default;
 
     public:
+        void setCasheLayerId(int layerId);
+        int getCasheLayerId() const;
+
         void loadFromAsset(std::string_view assetId);
 
         sf::Sprite& getSprite();
@@ -23,6 +26,7 @@ namespace Core
 
     private:
         sf::Sprite _sprite;
+        int _casheLayerId = 0;
     };
 }
 

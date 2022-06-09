@@ -5,6 +5,16 @@
 
 namespace Core
 {
+    void VisualObject::setCasheLayerId(int layerId)
+    {
+        _casheLayerId = layerId;
+    }
+
+    int VisualObject::getCasheLayerId() const
+    {
+        return _casheLayerId;
+    }
+
     void VisualObject::loadFromAsset(std::string_view assetId)
     {
         if (auto asset = Application::getInstance().getAssets()->getAsset<AssetTexture>(assetId)) {

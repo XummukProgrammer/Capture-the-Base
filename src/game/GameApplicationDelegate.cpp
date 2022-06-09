@@ -17,8 +17,17 @@ namespace Game
 
     void GameApplicationDelegate::onInitRenderVisualObjects(Core::RenderVisualObjects* renderVisualObjectsPtr)
     {
-        auto visualObject = std::make_shared<Core::VisualObject>();
-        visualObject->loadFromAsset("test");
-        renderVisualObjectsPtr->addVisualObject(visualObject);
+        {
+            auto visualObject = std::make_shared<Core::VisualObject>();
+            visualObject->loadFromAsset("test");
+            renderVisualObjectsPtr->addVisualObject(visualObject, 1);
+        }
+
+        {
+            auto visualObject = std::make_shared<Core::VisualObject>();
+            visualObject->loadFromAsset("test2");
+            renderVisualObjectsPtr->addVisualObject(visualObject);
+            renderVisualObjectsPtr->moveVisualObject(visualObject, 2);
+        }
     }
 }

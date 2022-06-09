@@ -4,6 +4,7 @@
 #include "VisualObject.hpp"
 
 #include <memory>
+#include <map>
 #include <vector>
 
 namespace Core
@@ -18,14 +19,18 @@ namespace Core
         ~RenderVisualObjects() = default;
 
     public:
-        void addVisualObject(const VisualObjectPtr& visualObjectPtr);
+        void addVisualObject(const VisualObjectPtr& visualObjectPtr, int layerId = 0);
+        void moveVisualObject(const VisualObjectPtr& visualObjectPtr, int newLayerId = 0);
+        void moveUpVisualObject(const VisualObjectPtr& visualObjectPtr);
+        void moveDownVisualObject(const VisualObjectPtr& visualObjectPtr);
+        void removeVisualObject(const VisualObjectPtr& visualObjectPtr);
 
     public:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
 
     private:
-        std::vector<VisualObjectPtr> _visualObjects;
+        std::map<int, std::vector<VisualObjectPtr>> _layers;
 
     };
 }
