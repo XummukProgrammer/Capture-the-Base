@@ -46,6 +46,7 @@ namespace Core
 
     public:
         std::string buildPath(std::string_view filePath) const;
+        std::string removeFileNameFromPath(const std::string& filePath) const;
 
         Window* getWindow() const;
         Assets* getAssets() const;

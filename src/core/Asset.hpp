@@ -8,6 +8,7 @@
 #include <pugixml.hpp>
 
 #include <memory>
+#include <string>
 
 namespace Core
 {
@@ -21,7 +22,14 @@ namespace Core
         virtual ~Asset() = default;
 
     public:
+        void setParentFileDir(std::string_view fileDir);
+        const std::string& getParentFileDir() const;
+
+    public:
         virtual void loadFromFile(pugi::xml_node& node) = 0;
+
+    private:
+        std::string _parentFileDir;
     };
 
     template<typename T>
@@ -62,7 +70,7 @@ namespace Core
         ~AssetTexture() = default;
 
     public:
-        void loadFromFile(pugi::xml_node& node);
+        void loadFromFile(pugi::xml_node& node) override;
         void loadFromFile(std::string_view filePath);
     };
 }

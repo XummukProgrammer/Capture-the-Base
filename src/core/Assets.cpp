@@ -5,11 +5,14 @@
 
 #include <pugixml.hpp>
 
+#include <iostream>
+
 namespace Core
 {
     void Assets::loadFromFile(std::string_view filePath)
     {
         auto&& path = Application::getInstance().buildPath(filePath);
+        auto&& parentDir = Application::getInstance().removeFileNameFromPath(path);
 
         pugi::xml_document doc;
         if (!doc.load_file(path.c_str())) {
@@ -25,6 +28,7 @@ namespace Core
             if (auto&& factorable = Application::getInstance().getFactory()->createType(assetType))
             {
                 if (auto asset = std::dynamic_pointer_cast<Asset>(factorable)) {
+                    asset->setParentFileDir(parentDir);
                     asset->loadFromFile(assetNode);
                     addAsset(assetId, std::move(asset));
                 }

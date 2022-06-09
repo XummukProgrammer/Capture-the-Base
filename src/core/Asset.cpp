@@ -4,11 +4,19 @@
 
 namespace Core
 {
+    void Asset::setParentFileDir(std::string_view fileDir)
+    {
+        _parentFileDir = fileDir;
+    }
+
+    const std::string& Asset::getParentFileDir() const
+    {
+        return _parentFileDir;
+    }
+
     void AssetTexture::loadFromFile(pugi::xml_node& node)
     {
-        const std::string filePath = Application::getInstance().buildPath(
-            node.attribute("filePath").as_string()
-        );
+        const std::string filePath = getParentFileDir() + "\\" + node.attribute("filePath").as_string();
 
         loadFromFile(filePath);
     }

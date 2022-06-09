@@ -47,7 +47,7 @@ namespace Core
     void Application::initExecuteDir(int argc, char* argv[])
     {
         const std::string executePath = std::string(argv[0]);
-        _executeDir = executePath.substr(0, executePath.find_last_of("\\"));
+        _executeDir = removeFileNameFromPath(executePath);
     }
 
     void Application::initWindow()
@@ -70,7 +70,7 @@ namespace Core
     void Application::initAssets()
     {
         _assetsPtr = new Assets;
-        _assetsPtr->loadFromFile("assets/Assets.xml");
+        _assetsPtr->loadFromFile("assets\\Assets.xml");
 
         getDelegate()->onInitAssets(_assetsPtr);
     }
@@ -126,7 +126,12 @@ namespace Core
 
     std::string Application::buildPath(std::string_view filePath) const
     {
-        return _executeDir + "/../../" + std::string{filePath};
+        return _executeDir + "\\..\\..\\" + std::string{filePath};
+    }
+
+    std::string Application::removeFileNameFromPath(const std::string& filePath) const
+    {
+        return filePath.substr(0, filePath.find_last_of("\\"));
     }
 
     Window* Application::getWindow() const
