@@ -14,6 +14,7 @@ namespace Core
     class Assets;
     class Factory;
     class States;
+    class RenderVisualObjects;
 
     class ApplicationDelegate
     {
@@ -26,6 +27,7 @@ namespace Core
         virtual void onInitAssets(Assets* assetsPtr) {}
         virtual void onInitFactory(Factory* factoryPtr) {}
         virtual void onInitStates(States* statesPtr) {}
+        virtual void onInitRenderVisualObjects(RenderVisualObjects* renderVisualObjectsPtr) {}
 
         virtual void onUpdate(float deltaTime) {}
         virtual void onDraw(sf::RenderWindow* wndPtr) {}
@@ -34,7 +36,7 @@ namespace Core
     class Application final
     {
     public:
-        Application() = default;
+        Application();
         ~Application() = default;
 
     public:
@@ -52,6 +54,7 @@ namespace Core
         Assets* getAssets() const;
         Factory* getFactory() const;
         States* getStates() const;
+        RenderVisualObjects* getRenderVisualObjects() const;
         const std::string& getExecuteDir() const;
 
     private:
@@ -74,6 +77,9 @@ namespace Core
         void initStates();
         void destroyStates();
 
+        void initRenderVisualObjects();
+        void destroyRenderVisualObjects();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
@@ -83,6 +89,7 @@ namespace Core
         Assets* _assetsPtr = nullptr;
         Factory* _factoryPtr = nullptr;
         States* _statesPtr = nullptr;
+        RenderVisualObjects* _renderVisualObjectsPtr = nullptr;
         std::string _executeDir;
     };
 }

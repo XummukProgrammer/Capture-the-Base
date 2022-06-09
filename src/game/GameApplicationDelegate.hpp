@@ -3,11 +3,6 @@
 
 #include <core/Application.hpp>
 
-namespace Core
-{
-    class States;
-}
-
 namespace Game
 {
     class GameApplicationDelegate final : public Core::ApplicationDelegate
@@ -18,6 +13,7 @@ namespace Game
 
     public:
         void onInitStates(Core::States* statesPtr) override;
+        void onInitRenderVisualObjects(Core::RenderVisualObjects* renderVisualObjectsPtr) override;
     };
 }
 

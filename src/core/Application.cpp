@@ -4,11 +4,22 @@
 #include "Assets.hpp"
 #include "Factory.hpp"
 #include "States.hpp"
+#include "RenderVisualObjects.hpp"
 
 #include <SFML/Graphics.hpp>
 
 namespace Core
 {
+    Application::Application()
+        : _wndPtr(new Window)
+        , _assetsPtr(new Assets)
+        , _factoryPtr(new Factory)
+        , _statesPtr(new States)
+        , _renderVisualObjectsPtr(new RenderVisualObjects)
+    {
+
+    }
+
     Application& Application::getInstance()
     {
         static Application app{};
@@ -27,12 +38,14 @@ namespace Core
         initExecuteDir(argc, argv);
         initFactory();
         initAssets();
+        initRenderVisualObjects();
         initWindow();
         initStates();
     }
 
     void Application::deinit()
     {
+        destroyRenderVisualObjects();
         destroyWindow();
         destroyAssets();
         destroyFactory();
@@ -52,7 +65,6 @@ namespace Core
 
     void Application::initWindow()
     {
-        _wndPtr = new Window();
         _wndPtr->create("Capture the Base", 800, 600, 60);
         _wndPtr->setOnUpdateCallback(std::bind(&Application::onUpdate, this, std::placeholders::_1));
         _wndPtr->setOnDrawCallback(std::bind(&Application::onDraw, this, std::placeholders::_1));
@@ -69,7 +81,6 @@ namespace Core
 
     void Application::initAssets()
     {
-        _assetsPtr = new Assets;
         _assetsPtr->loadFromFile("assets\\Assets.xml");
 
         getDelegate()->onInitAssets(_assetsPtr);
@@ -82,7 +93,6 @@ namespace Core
 
     void Application::initFactory()
     {
-        _factoryPtr = new Factory;
         _factoryPtr->registerType<AssetTexture>("AssetTexture");
 
         getDelegate()->onInitFactory(_factoryPtr);
@@ -95,8 +105,6 @@ namespace Core
 
     void Application::initStates()
     {
-        _statesPtr = new States;
-
         getDelegate()->onInitStates(_statesPtr);
     }
 
@@ -105,21 +113,27 @@ namespace Core
         delete _statesPtr;
     }
 
+    void Application::initRenderVisualObjects()
+    {
+        getDelegate()->onInitRenderVisualObjects(_renderVisualObjectsPtr);
+    }
+
+    void Application::destroyRenderVisualObjects()
+    {
+        delete _renderVisualObjectsPtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
         _statesPtr->onUpdate(deltaTime);
+        _renderVisualObjectsPtr->onUpdate(deltaTime);
 
         getDelegate()->onUpdate(deltaTime);
     }
 
     void Application::onDraw(sf::RenderWindow* wndPtr)
     {
-        if (auto* asset = _assetsPtr->getAsset<AssetTexture>("test")) {
-            sf::Sprite sprite;
-            sprite.setTexture(*asset);
-            sprite.setTextureRect({ 0, 0, 32, 32 });
-            wndPtr->draw(sprite);
-        }
+        _renderVisualObjectsPtr->onDraw(wndPtr);
 
         getDelegate()->onDraw(wndPtr);
     }
@@ -152,6 +166,11 @@ namespace Core
     States* Application::getStates() const
     {
         return _statesPtr;
+    }
+
+    RenderVisualObjects* Application::getRenderVisualObjects() const
+    {
+        return _renderVisualObjectsPtr;
     }
 
     const std::string& Application::getExecuteDir() const

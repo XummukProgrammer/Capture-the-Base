@@ -43,10 +43,14 @@
 		<Unit filename="src/core/Assets.hpp" />
 		<Unit filename="src/core/Factory.cpp" />
 		<Unit filename="src/core/Factory.hpp" />
+		<Unit filename="src/core/RenderVisualObjects.cpp" />
+		<Unit filename="src/core/RenderVisualObjects.hpp" />
 		<Unit filename="src/core/State.cpp" />
 		<Unit filename="src/core/State.hpp" />
 		<Unit filename="src/core/States.cpp" />
 		<Unit filename="src/core/States.hpp" />
+		<Unit filename="src/core/VisualObject.cpp" />
+		<Unit filename="src/core/VisualObject.hpp" />
 		<Unit filename="src/core/Window.cpp" />
 		<Unit filename="src/core/Window.hpp" />
 		<Unit filename="src/game/GameApplicationDelegate.cpp" />
