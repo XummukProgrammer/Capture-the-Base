@@ -10,6 +10,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <filesystem>
+
 namespace Core
 {
     Application::Application()
@@ -159,12 +161,12 @@ namespace Core
 
     std::string Application::buildPath(std::string_view filePath) const
     {
-        return _executeDir + "\\..\\..\\" + std::string{filePath};
+        return _executeDir + "\\..\\" + std::string{filePath};
     }
 
     std::string Application::removeFileNameFromPath(const std::string& filePath) const
     {
-        return filePath.substr(0, filePath.find_last_of("\\"));
+        return std::filesystem::path(filePath).remove_filename().generic_string();
     }
 
     Window* Application::getWindow() const
