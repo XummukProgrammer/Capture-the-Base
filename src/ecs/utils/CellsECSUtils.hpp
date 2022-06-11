@@ -4,19 +4,20 @@
 #include <ecs/components/CellComponent.hpp>
 
 #include <string>
-#include <tuple>
 
 namespace ECS
 {
     class CellsECSUtils final
     {
     public:
+        using TexturesPair = std::pair<std::string, std::string>;
+        using TexturesMap = std::map<CellComponent::Type, TexturesPair>;
+
+    public:
         static entt::entity createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
-            const std::string& cellTextureAssetId, const std::string& outlineTextureAssetId, const sf::Vector2i& size);
-        static std::tuple<entt::entity, entt::entity> createCellsBlock(const sf::Vector2f& startPosition, 
-            CellComponent::Type startType, const sf::Vector2i& indexes,
-            const std::string& whiteCellTextureAssetId, const std::string& whiteOutlineTextureAssetId,
-            const std::string& blackCellTextureAssetId, const std::string& blackOutlineTextureAssetId,
+            const TexturesPair& texturesPair, const sf::Vector2i& size);
+        static void createCellsBlock(const sf::Vector2f& startPosition, 
+            CellComponent::Type startType, const sf::Vector2i& indexes, TexturesMap& textures, 
             const sf::Vector2i& size);
         static void createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks, 
             const std::string& whiteCellTextureAssetId, const std::string& whiteOutlineTextureAssetId, 
