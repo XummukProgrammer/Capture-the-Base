@@ -24,10 +24,24 @@ namespace Game
     {
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
 
-        ECS::CellsECSUtils::createCells({ 50.f, 50.f }, { 4, 8 }, 
-            "Cell_White", "Cell_White_Outline",
-            "Cell_Black", "Cell_Black_Outline",
-            { 64, 64 });
+        ECS::CellsECSUtils::CellsTextures cellsTextures;
+        cellsTextures.whiteCellTextures.baseAssetId = "Cell_White";
+        cellsTextures.whiteCellTextures.outlineTopAssetId = "Cell_Outline_Top";
+        cellsTextures.whiteCellTextures.outlineDownAssetId = "Cell_Outline_Down";
+        cellsTextures.whiteCellTextures.outlineLeftAssetId = "Cell_Outline_Left";
+        cellsTextures.whiteCellTextures.outlineRightAssetId = "Cell_Outline_Right";
+        cellsTextures.whiteCellTextures.moveableAssetId = "Cell_Moveable";
+        cellsTextures.whiteCellTextures.selectedAssetId = "Cell_Selected";
+
+        cellsTextures.blackCellTextures.baseAssetId = "Cell_Black";
+        cellsTextures.blackCellTextures.outlineTopAssetId = "Cell_Outline_Top";
+        cellsTextures.blackCellTextures.outlineDownAssetId = "Cell_Outline_Down";
+        cellsTextures.blackCellTextures.outlineLeftAssetId = "Cell_Outline_Left";
+        cellsTextures.blackCellTextures.outlineRightAssetId = "Cell_Outline_Right";
+        cellsTextures.blackCellTextures.moveableAssetId = "Cell_Moveable";
+        cellsTextures.blackCellTextures.selectedAssetId = "Cell_Selected";
+
+        ECS::CellsECSUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 });
 
         ECS::ChipsECSUtils::createChip(ECS::ChipComponent::Type::White, { 1, 0 }, "Chip_White", { 64, 64 });
     }

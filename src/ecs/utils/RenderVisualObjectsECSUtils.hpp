@@ -19,6 +19,7 @@ namespace ECS
             sf::Vector2f scale = { 1.f, 1.f };
             float rotation = 0.f;
             sf::IntRect textureRect = { 0, 0, 32, 32 };
+            bool isVisible = true;
         };
 
         static entt::entity createVisualObject(const VisualObjectCreateInfo& info);
@@ -26,6 +27,8 @@ namespace ECS
         static void moveUpVisualObject(entt::entity entity);
         static void moveDownVisualObject(entt::entity entity);
         static void removeVisualObject(entt::entity entity);
+        static void showVisualObject(entt::entity entity);
+        static void hideVisualObject(entt::entity entity);
 
     };
 }

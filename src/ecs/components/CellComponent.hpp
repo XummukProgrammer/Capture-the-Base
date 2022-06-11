@@ -14,7 +14,12 @@ namespace ECS
         };
         Type type;
 
-        entt::entity outlineEntity;
+        entt::entity outlineTopEntity;
+        entt::entity outlineDownEntity;
+        entt::entity outlineLeftEntity;
+        entt::entity outlineRightEntity;
+        entt::entity moveableEntity;
+        entt::entity selectedEntity;
 
         sf::Vector2i indexes;
     };

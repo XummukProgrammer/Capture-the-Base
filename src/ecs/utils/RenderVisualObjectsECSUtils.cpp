@@ -28,6 +28,12 @@ namespace ECS
         auto& sprite = visualObject->getSprite();
         sprite.setTextureRect(info.textureRect);
 
+        if (info.isVisible) {
+            visualObject->show();
+        } else {
+            visualObject->hide();
+        }
+
         visualObjectComponent.visualObjectPtr = visualObject;
 
         Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, info.layerName);
@@ -88,5 +94,31 @@ namespace ECS
         }
 
         registry.destroy(entity);
+    }
+
+    void RenderVisualObjectsECSUtils::showVisualObject(entt::entity entity)
+    {
+        entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        if (!registry.valid(entity)) {
+            return;
+        }
+
+        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
+            visualObjectComponent->visualObjectPtr->show();
+        }
+    }
+
+    void RenderVisualObjectsECSUtils::hideVisualObject(entt::entity entity)
+    {
+        entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        if (!registry.valid(entity)) {
+            return;
+        }
+
+        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
+            visualObjectComponent->visualObjectPtr->hide();
+        }
     }
 }

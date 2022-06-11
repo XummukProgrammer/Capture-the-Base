@@ -15,6 +15,21 @@ namespace Core
         return _casheLayerId;
     }
 
+    void VisualObject::show()
+    {
+        _isVisible = true;
+    }
+
+    void VisualObject::hide()
+    {
+        _isVisible = false;
+    }
+
+    bool VisualObject::isVisible() const
+    {
+        return _isVisible;
+    }
+
     void VisualObject::loadFromAsset(std::string_view assetId)
     {
         if (auto asset = Application::getInstance().getAssets()->getAsset<AssetTexture>(assetId)) {
@@ -29,6 +44,8 @@ namespace Core
 
     void VisualObject::onDraw(sf::RenderWindow* wndPtr)
     {
-        wndPtr->draw(_sprite);
+        if (isVisible()) {
+            wndPtr->draw(_sprite);
+        }
     }
 }

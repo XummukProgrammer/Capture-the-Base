@@ -16,7 +16,9 @@
 	<!-- Settings -->
 	<Asset type="AssetRenderLayers" id="RenderLayers">
 		<Layer id="Cell" />
+		<Layer id="CellSelected" />
 		<Layer id="CellOutline" />
+		<Layer id="CellMoveable" />
 		<Layer id="Chip" />
 	</Asset>
 </Assets>
