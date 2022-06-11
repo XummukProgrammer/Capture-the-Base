@@ -9,21 +9,28 @@
 
 namespace ECS
 {
-    entt::entity RenderVisualObjectsECSUtils::createVisualObject(std::string_view assetId, int layerId,
-        const sf::Vector2f& position, const sf::Vector2f& scale, float rotation)
+    entt::entity RenderVisualObjectsECSUtils::createVisualObject(const VisualObjectCreateInfo& info)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
         entt::entity entity = registry.create();
 
         ECS::TransformComponent& transformComponent = registry.emplace<ECS::TransformComponent>(entity);
-        transformComponent.position = position;
-        transformComponent.scale = scale;
-        transformComponent.rotation = rotation;
+        transformComponent.position = info.position;
+        transformComponent.scale = info.scale;
+        transformComponent.rotation = info.rotation;
 
+        // Load Visual Object
         ECS::VisualObjectComponent& visualObjectComponent = registry.emplace<ECS::VisualObjectComponent>(entity);
-        visualObjectComponent.visualObjectPtr = std::make_shared<Core::VisualObject>();
-        visualObjectComponent.visualObjectPtr->loadFromAsset(assetId);
-        Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, layerId);
+        
+        auto visualObject = std::make_shared<Core::VisualObject>();
+        visualObject->loadFromAsset(info.assetId);
+        
+        auto& sprite = visualObject->getSprite();
+        sprite.setTextureRect(info.textureRect);
+
+        visualObjectComponent.visualObjectPtr = visualObject;
+
+        Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, info.layerId);
 
         return entity;
     }

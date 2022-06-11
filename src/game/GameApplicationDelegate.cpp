@@ -6,7 +6,7 @@
 #include <game/GameState.hpp>
 
 #include <ecs/ECSWorld.hpp>
-#include <ecs/utils/RenderVisualObjectsECSUtils.hpp>
+#include <ecs/utils/CellsECSUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 
 namespace Game
@@ -23,6 +23,9 @@ namespace Game
     {
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
 
-        entt::entity test1 = ECS::RenderVisualObjectsECSUtils::createVisualObject("test", 0, { 50.f, 50.f }, { 0.5f, 0.5f }, 60.f);
+        ECS::CellsECSUtils::createCells({ 50.f, 50.f }, { 4, 8 }, 
+            "Cell_White", "Cell_White_Outline",
+            "Cell_Black", "Cell_Black_Outline",
+            { 64, 64 });
     }
 }

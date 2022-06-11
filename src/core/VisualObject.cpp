@@ -19,7 +19,6 @@ namespace Core
     {
         if (auto asset = Application::getInstance().getAssets()->getAsset<AssetTexture>(assetId)) {
             _sprite.setTexture(*asset);
-            _sprite.setTextureRect({ 0, 0, 32, 32 });
         }
     }
 

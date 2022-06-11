@@ -9,10 +9,17 @@ namespace ECS
     class RenderVisualObjectsECSUtils final
     {
     public:
-        static entt::entity createVisualObject(std::string_view assetId, int layerId = 0,
-        const sf::Vector2f& position = { 0.f, 0.f },
-        const sf::Vector2f& scale = { 1.f, 1.f },
-        float rotation = 0.f);
+        struct VisualObjectCreateInfo
+        {
+            std::string assetId;
+            int layerId = 0;
+            sf::Vector2f position = { 0.f, 0.f };
+            sf::Vector2f scale = { 1.f, 1.f };
+            float rotation = 0.f;
+            sf::IntRect textureRect = { 0, 0, 32, 32 };
+        };
+
+        static entt::entity createVisualObject(const VisualObjectCreateInfo& info);
         static void moveVisualObject(entt::entity entity, int newLayerId);
         static void moveUpVisualObject(entt::entity entity);
         static void moveDownVisualObject(entt::entity entity);

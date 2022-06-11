@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Assets>
-	<Asset type="AssetTexture" id="test" filePath="test.png" />
-	<Asset type="AssetTexture" id="test2" filePath="test2.png" />
+	<!-- Textures -->
+	<Asset type="AssetTexture" id="Cell_White" filePath="textures\\Cell_White.png" />
+	<Asset type="AssetTexture" id="Cell_Black" filePath="textures\\Cell_Black.png" />
 </Assets>

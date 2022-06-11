@@ -13,10 +13,12 @@ set(GAME_HEADERS
 	src/ecs/ECSWorld.hpp
 	src/ecs/components/TransformComponent.hpp
 	src/ecs/components/VisualObjectComponent.hpp
+	src/ecs/components/CellComponent.hpp
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.hpp
+	src/ecs/utils/CellsECSUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -38,10 +40,12 @@ set(GAME_SOURCES
 	src/ecs/ECSWorld.cpp
 	src/ecs/components/TransformComponent.cpp
 	src/ecs/components/VisualObjectComponent.cpp
+	src/ecs/components/CellComponent.cpp
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.cpp
+	src/ecs/utils/CellsECSUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp
