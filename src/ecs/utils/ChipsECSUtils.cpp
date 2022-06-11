@@ -1,7 +1,7 @@
 #include "ChipsECSUtils.hpp"
 
 #include "CellsECSUtils.hpp"
-#include "RenderVisualObjectsECSUtils.hpp"
+#include <ecs/utils/RenderVisualObjectsECSUtils.hpp>
 
 #include <core/Application.hpp>
 
@@ -28,7 +28,7 @@ namespace ECS
 
         RenderVisualObjectsECSUtils::VisualObjectCreateInfo visualObjectCreateInfo;
         visualObjectCreateInfo.assetId = textureAssetId;
-        visualObjectCreateInfo.layerId = 1;
+        visualObjectCreateInfo.layerName = "Chip";
         visualObjectCreateInfo.textureRect = { 0, 0, size.x, size.y };
         visualObjectCreateInfo.position = position;
         auto entity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);

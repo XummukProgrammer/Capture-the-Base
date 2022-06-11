@@ -6,4 +6,11 @@
 	
 	<Asset type="AssetTexture" id="Chip_White" filePath="textures\\Chip_White.png" />
 	<Asset type="AssetTexture" id="Chip_Black" filePath="textures\\Chip_Black.png" />
+	
+	<!-- Settings -->
+	<Asset type="AssetRenderLayers" id="RenderLayers">
+		<Layer id="Cell" />
+		<Layer id="CellOutline" />
+		<Layer id="Chip" />
+	</Asset>
 </Assets>

@@ -1,5 +1,8 @@
 #include "RenderVisualObjects.hpp"
 
+#include <core/Application.hpp>
+#include <core/Assets.hpp>
+
 namespace Core
 {
     void RenderVisualObjects::addVisualObject(const VisualObjectPtr& visualObjectPtr, int layerId)
@@ -8,10 +11,20 @@ namespace Core
         visualObjectPtr->setCasheLayerId(layerId);
     }
 
+    void RenderVisualObjects::addVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
+    {
+        addVisualObject(visualObjectPtr, getLayerIdFromName(layerName));
+    }
+
     void RenderVisualObjects::moveVisualObject(const VisualObjectPtr& visualObjectPtr, int newLayerId)
     {
         removeVisualObject(visualObjectPtr);
         addVisualObject(visualObjectPtr, newLayerId);
+    }
+
+    void RenderVisualObjects::moveVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
+    {
+        moveVisualObject(visualObjectPtr, getLayerIdFromName(layerName));
     }
 
     void RenderVisualObjects::moveUpVisualObject(const VisualObjectPtr& visualObjectPtr)
@@ -40,6 +53,14 @@ namespace Core
                 }
             }
         }
+    }
+
+    int RenderVisualObjects::getLayerIdFromName(const std::string& layerName)
+    {
+        if (auto asset = Application::getInstance().getAssets()->getOriginAsset<AssetRenderLayers>("RenderLayers")) {
+            return asset->getLayerIdFromName(layerName);
+        }
+        return 0;
     }
 
     void RenderVisualObjects::onUpdate(float deltaTime)

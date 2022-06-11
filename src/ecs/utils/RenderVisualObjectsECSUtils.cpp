@@ -30,7 +30,7 @@ namespace ECS
 
         visualObjectComponent.visualObjectPtr = visualObject;
 
-        Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, info.layerId);
+        Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, info.layerName);
 
         return entity;
     }

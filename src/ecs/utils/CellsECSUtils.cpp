@@ -15,6 +15,7 @@ namespace ECS
         // Cell entity
         RenderVisualObjectsECSUtils::VisualObjectCreateInfo visualObjectCreateInfo;
         visualObjectCreateInfo.assetId = texturesPair.first;
+        visualObjectCreateInfo.layerName = "Cell";
         visualObjectCreateInfo.textureRect = { 0, 0, size.x, size.y };
         visualObjectCreateInfo.position = { startPosition.x + indexes.x * size.x, startPosition.y + indexes.y * size.y };
         auto cellEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
@@ -25,6 +26,7 @@ namespace ECS
 
         // Outline entity
         visualObjectCreateInfo.assetId = texturesPair.second;
+        visualObjectCreateInfo.layerName = "CellOutline";
         cellComponent.outlineEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
 
         return cellEntity;

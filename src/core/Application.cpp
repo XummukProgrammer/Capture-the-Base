@@ -101,6 +101,7 @@ namespace Core
     void Application::initFactory()
     {
         _factoryPtr->registerType<AssetTexture>("AssetTexture");
+        _factoryPtr->registerType<AssetRenderLayers>("AssetRenderLayers");
 
         getDelegate()->onInitFactory(_factoryPtr);
     }

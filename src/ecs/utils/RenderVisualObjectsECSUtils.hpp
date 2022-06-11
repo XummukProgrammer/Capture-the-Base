@@ -4,6 +4,8 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 
+#include <string>
+
 namespace ECS
 {
     class RenderVisualObjectsECSUtils final
@@ -12,7 +14,7 @@ namespace ECS
         struct VisualObjectCreateInfo
         {
             std::string assetId;
-            int layerId = 0;
+            std::string layerName = "Default";
             sf::Vector2f position = { 0.f, 0.f };
             sf::Vector2f scale = { 1.f, 1.f };
             float rotation = 0.f;

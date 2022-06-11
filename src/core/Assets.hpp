@@ -24,6 +24,7 @@ namespace Core
 
         void addAsset(std::string_view id, AssetPtr&& asset);
         template<typename T> typename T::OriginType* getAsset(std::string_view id) const;
+        template<typename T> std::shared_ptr<T> getOriginAsset(std::string_view id) const;
 
     private:
         std::map<std::string, AssetPtr> _assets;
@@ -37,6 +38,15 @@ namespace Core
             if (auto castedAsset = std::dynamic_pointer_cast<T>(it->second)) {
                 return castedAsset->getData();
             }
+        }
+        return nullptr;
+    }
+    template<typename T>
+    std::shared_ptr<T> Assets::getOriginAsset(std::string_view id) const
+    {
+        auto it = _assets.find(std::string{id});
+        if (it != _assets.end()) {
+            return std::dynamic_pointer_cast<T>(it->second);
         }
         return nullptr;
     }

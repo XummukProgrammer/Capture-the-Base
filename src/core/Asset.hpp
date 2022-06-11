@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace Core
 {
@@ -45,7 +46,7 @@ namespace Core
 
     public:
         void setData(DataPtr&& data);
-        OriginType* getData();
+        OriginType* getData() const;
 
     private:
         DataPtr _dataPtr;
@@ -58,7 +59,7 @@ namespace Core
     }
 
     template<typename T>
-    typename AssetData<T>::OriginType* AssetData<T>::getData()
+    typename AssetData<T>::OriginType* AssetData<T>::getData() const
     {
         return _dataPtr.get();
     }
@@ -72,6 +73,19 @@ namespace Core
     public:
         void loadFromFile(pugi::xml_node& node) override;
         void loadFromFile(std::string_view filePath);
+    };
+
+    class AssetRenderLayers final : public AssetData<std::vector<std::string>>
+    {
+    public:
+        AssetRenderLayers() = default;
+        ~AssetRenderLayers() = default;
+
+    public:
+        void loadFromFile(pugi::xml_node& node) override;
+
+    public:
+        int getLayerIdFromName(std::string_view name) const;
     };
 }
 

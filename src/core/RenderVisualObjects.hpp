@@ -6,6 +6,7 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <string>
 
 namespace Core
 {
@@ -20,10 +21,15 @@ namespace Core
 
     public:
         void addVisualObject(const VisualObjectPtr& visualObjectPtr, int layerId = 0);
+        void addVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName = "Default");
         void moveVisualObject(const VisualObjectPtr& visualObjectPtr, int newLayerId = 0);
+        void moveVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName = "Default");
         void moveUpVisualObject(const VisualObjectPtr& visualObjectPtr);
         void moveDownVisualObject(const VisualObjectPtr& visualObjectPtr);
         void removeVisualObject(const VisualObjectPtr& visualObjectPtr);
+
+    private:
+        int getLayerIdFromName(const std::string& layerName);
 
     public:
         void onUpdate(float deltaTime);
