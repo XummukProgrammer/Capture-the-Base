@@ -14,11 +14,13 @@ set(GAME_HEADERS
 	src/ecs/components/TransformComponent.hpp
 	src/ecs/components/VisualObjectComponent.hpp
 	src/ecs/components/CellComponent.hpp
+	src/ecs/components/ChipComponent.hpp
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.hpp
 	src/ecs/utils/CellsECSUtils.hpp
+	src/ecs/utils/ChipsECSUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -41,11 +43,13 @@ set(GAME_SOURCES
 	src/ecs/components/TransformComponent.cpp
 	src/ecs/components/VisualObjectComponent.cpp
 	src/ecs/components/CellComponent.cpp
+	src/ecs/components/ChipComponent.cpp
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.cpp
 	src/ecs/utils/CellsECSUtils.cpp
+	src/ecs/utils/ChipsECSUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

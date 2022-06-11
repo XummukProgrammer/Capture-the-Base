@@ -65,4 +65,19 @@ namespace ECS
             }
         }
     }
+
+    entt::entity CellsECSUtils::getCellFromIndexes(const sf::Vector2i& indexes)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<CellComponent>();
+
+        for (auto entity : view) {
+            auto& cellComponent = registry.get<CellComponent>(entity);
+            if (cellComponent.indexes == indexes) {
+                return entity;
+            }
+        }
+
+        return entt::null;
+    }
 }

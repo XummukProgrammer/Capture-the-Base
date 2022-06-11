@@ -7,6 +7,7 @@
 
 #include <ecs/ECSWorld.hpp>
 #include <ecs/utils/CellsECSUtils.hpp>
+#include <ecs/utils/ChipsECSUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 
 namespace Game
@@ -27,5 +28,7 @@ namespace Game
             "Cell_White", "Cell_White_Outline",
             "Cell_Black", "Cell_Black_Outline",
             { 64, 64 });
+
+        ECS::ChipsECSUtils::createChip(ECS::ChipComponent::Type::White, { 1, 0 }, "Chip_White", { 64, 64 });
     }
 }

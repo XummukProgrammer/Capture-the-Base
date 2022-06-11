@@ -23,6 +23,8 @@ namespace ECS
             const std::string& whiteCellTextureAssetId, const std::string& whiteOutlineTextureAssetId, 
             const std::string& blackCellTextureAssetId, const std::string& blackOutlineTextureAssetId,
             const sf::Vector2i& size);
+
+        static entt::entity getCellFromIndexes(const sf::Vector2i& indexes);
     };
 }
 
