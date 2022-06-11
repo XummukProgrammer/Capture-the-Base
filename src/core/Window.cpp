@@ -48,7 +48,7 @@ namespace Core
 
             onUpdate(deltaTime.asSeconds());
 
-            _wndPtr->clear();
+            _wndPtr->clear(sf::Color::White);
             onDraw();
             _wndPtr->display();
         }

@@ -78,8 +78,8 @@ namespace ECS
         const CellsTextures& cellsTextures,
         const sf::Vector2i& size)
     {
+        // Create cells
         sf::Vector2i indexes = { 0, 0 };
-
         for (int y = 0; y < blocks.y; ++y) {
             const CellComponent::Type startType = y % 2 ? CellComponent::Type::Black : CellComponent::Type::White;
 
@@ -87,6 +87,32 @@ namespace ECS
                 indexes = { x * 2, y };
                 createCellsBlock(startPosition, startType, indexes, cellsTextures, size);
             }
+        }
+
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        // Init frame
+        ++indexes.x;
+
+        {
+            auto view = registry.view<CellComponent>();
+            view.each([&indexes](CellComponent& cellComponent) {
+                if (cellComponent.indexes.x == 0) {
+                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineLeftEntity);
+                }
+
+                if (cellComponent.indexes.y == 0) {
+                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineTopEntity);
+                }
+
+                if (cellComponent.indexes.x == indexes.x) {
+                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineRightEntity);
+                }
+
+                if (cellComponent.indexes.y == indexes.y) {
+                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineDownEntity);
+                }
+            });
         }
     }
 
