@@ -1,11 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Assets>
 	<!-- Textures -->
-	<Asset type="AssetTexture" id="Cell_White" filePath="textures\\Cell_White.png" />
-	<Asset type="AssetTexture" id="Cell_Black" filePath="textures\\Cell_Black.png" />
+	<Asset type="AssetTexture" id="Cell_White" filePath="textures\\Cell\\Cell_White.png" />
+	<Asset type="AssetTexture" id="Cell_Black" filePath="textures\\Cell\\Cell_Black.png" />
+	<Asset type="AssetTexture" id="Cell_Outline_Top" filePath="textures\\Cell\\Cell_Outline_Top.png" />
+	<Asset type="AssetTexture" id="Cell_Outline_Down" filePath="textures\\Cell\\Cell_Outline_Down.png" />
+	<Asset type="AssetTexture" id="Cell_Outline_Left" filePath="textures\\Cell\\Cell_Outline_Left.png" />
+	<Asset type="AssetTexture" id="Cell_Outline_Right" filePath="textures\\Cell\\Cell_Outline_Right.png" />
+	<Asset type="AssetTexture" id="Cell_Moveable" filePath="textures\\Cell\\Cell_Moveable.png" />
+	<Asset type="AssetTexture" id="Cell_Selected" filePath="textures\\Cell\\Cell_Selected.png" />
 	
-	<Asset type="AssetTexture" id="Chip_White" filePath="textures\\Chip_White.png" />
-	<Asset type="AssetTexture" id="Chip_Black" filePath="textures\\Chip_Black.png" />
+	<Asset type="AssetTexture" id="Chip_White" filePath="textures\\Chip\\Chip_White.png" />
+	<Asset type="AssetTexture" id="Chip_Black" filePath="textures\\Chip\\Chip_Black.png" />
 	
 	<!-- Settings -->
 	<Asset type="AssetRenderLayers" id="RenderLayers">
