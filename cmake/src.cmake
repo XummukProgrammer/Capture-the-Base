@@ -16,7 +16,6 @@ set(GAME_HEADERS
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
-	src/ecs/utils/ECSFactoryObjects.hpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
@@ -42,7 +41,6 @@ set(GAME_SOURCES
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
-	src/ecs/utils/ECSFactoryObjects.cpp
 	src/ecs/utils/RenderVisualObjectsECSUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
