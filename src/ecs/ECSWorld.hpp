@@ -23,6 +23,7 @@ namespace ECS
 
     public:
         void onUpdate(float deltaTime);
+        void onDraw(sf::RenderWindow* wndPtr);
 
     private:
         entt::registry _registry;

@@ -11,19 +11,25 @@ set(GAME_HEADERS
 	src/core/Window.hpp
 	
 	src/ecs/ECSWorld.hpp
+	
 	src/ecs/components/TransformComponent.hpp
 	src/ecs/components/VisualObjectComponent.hpp
 	src/ecs/components/TextureComponent.hpp
 	src/ecs/components/CellComponent.hpp
 	src/ecs/components/ChipComponent.hpp
 	src/ecs/components/TeamComponent.hpp
+	src/ecs/components/TextComponent.hpp
+	
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
+	src/ecs/systems/UpdateTextsSystem.hpp
+	
 	src/ecs/utils/VisualObjectsUtils.hpp
 	src/ecs/utils/CellsUtils.hpp
 	src/ecs/utils/ChipsUtils.hpp
 	src/ecs/utils/TeamsUtils.hpp
+	src/ecs/utils/TextsUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -43,19 +49,25 @@ set(GAME_SOURCES
 	src/core/Window.cpp
 	
 	src/ecs/ECSWorld.cpp
+	
 	src/ecs/components/TransformComponent.cpp
 	src/ecs/components/VisualObjectComponent.cpp
 	src/ecs/components/TextureComponent.cpp
 	src/ecs/components/CellComponent.cpp
 	src/ecs/components/ChipComponent.cpp
 	src/ecs/components/TeamComponent.cpp
+	src/ecs/components/TextComponent.cpp
+	
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
+	src/ecs/systems/UpdateTextsSystem.cpp
+	
 	src/ecs/utils/VisualObjectsUtils.cpp
 	src/ecs/utils/CellsUtils.cpp
 	src/ecs/utils/ChipsUtils.cpp
 	src/ecs/utils/TeamsUtils.cpp
+	src/ecs/utils/TextsUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

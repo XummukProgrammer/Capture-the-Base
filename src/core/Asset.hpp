@@ -87,6 +87,17 @@ namespace Core
     public:
         int getLayerIdFromName(std::string_view name) const;
     };
+
+    class AssetFont final : public AssetData<sf::Font>
+    {
+    public:
+        AssetFont() = default;
+        ~AssetFont() = default;
+
+    public:
+        void loadFromFile(pugi::xml_node& node) override;
+        void loadFromFile(std::string_view filePath);
+    };
 }
 
 #endif // __ASSET_INCLUDE_FILE__

@@ -48,4 +48,18 @@ namespace Core
         }
         return 0;
     }
+
+    void AssetFont::loadFromFile(pugi::xml_node& node)
+    {
+        const std::string filePath = getParentFileDir() + "\\" + node.attribute("filePath").as_string();
+
+        loadFromFile(filePath);
+    }
+
+    void AssetFont::loadFromFile(std::string_view filePath)
+    {
+        auto dataPtr = std::make_unique<sf::Font>();
+        dataPtr->loadFromFile(std::string{filePath});
+        setData(std::move(dataPtr));
+    }
 }

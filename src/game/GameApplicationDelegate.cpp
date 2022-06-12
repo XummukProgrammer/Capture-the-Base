@@ -8,7 +8,9 @@
 #include <ecs/utils/CellsUtils.hpp>
 #include <ecs/utils/ChipsUtils.hpp>
 #include <ecs/utils/TeamsUtils.hpp>
+#include <ecs/utils/TextsUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
+#include <ecs/systems/UpdateTextsSystem.hpp>
 
 namespace Game
 {
@@ -23,6 +25,7 @@ namespace Game
     void GameApplicationDelegate::onInitECSWorld(ECS::World* worldPtr)
     {
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
+        worldPtr->addSystem<ECS::UpdateTextsSystem>();
 
         ECS::CellsUtils::CellsTextures cellsTextures;
         cellsTextures.whiteCellTextures.baseAssetId = "Cell_White";
@@ -45,5 +48,11 @@ namespace Game
 
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
+
+        ECS::TextsUtils::TextCreateInfo textCreateInfo;
+        textCreateInfo.fontAssetId = "DefaultFont";
+        textCreateInfo.text = "Hello, World!";
+        textCreateInfo.position.x = 100.f;
+        ECS::TextsUtils::createText(textCreateInfo);
     }
 }

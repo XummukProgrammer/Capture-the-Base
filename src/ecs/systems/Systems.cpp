@@ -19,4 +19,13 @@ namespace ECS
             systemPtr->onUpdate(deltaTime, registry);
         }
     }
+
+    void Systems::onDraw(sf::RenderWindow* wndPtr)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        for (auto& systemPtr : _systems) {
+            systemPtr->onDraw(registry, wndPtr);
+        }
+    }
 }

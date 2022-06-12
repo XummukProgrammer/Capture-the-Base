@@ -13,6 +13,9 @@
 	<Asset type="AssetTexture" id="Chip_White" filePath="textures\\Chip\\Chip_White.png" />
 	<Asset type="AssetTexture" id="Chip_Black" filePath="textures\\Chip\\Chip_Black.png" />
 	
+	<!-- Fonts -->
+	<Asset type="AssetFont" id="DefaultFont" filePath="fonts\\CyrilicOld.TTF" />
+	
 	<!-- Settings -->
 	<Asset type="AssetRenderLayers" id="RenderLayers">
 		<Layer id="Cell" />

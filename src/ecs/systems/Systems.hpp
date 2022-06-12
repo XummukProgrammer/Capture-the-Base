@@ -21,6 +21,7 @@ namespace ECS
         void addSystem(SystemPtr&& systemPtr);
 
         void onUpdate(float deltaTime);
+        void onDraw(sf::RenderWindow* wndPtr);
 
     private:
         std::list<SystemPtr> _systems;

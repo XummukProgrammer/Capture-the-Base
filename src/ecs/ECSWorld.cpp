@@ -21,4 +21,9 @@ namespace ECS
     {
         _systemsPtr->onUpdate(deltaTime);
     }
+
+    void World::onDraw(sf::RenderWindow* wndPtr)
+    {
+        _systemsPtr->onDraw(wndPtr);
+    }
 }

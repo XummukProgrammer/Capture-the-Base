@@ -1,6 +1,8 @@
 #ifndef __SYSTEM_INCLUDE_FILE__
 #define __SYSTEM_INCLUDE_FILE__
 
+#include <SFML/Graphics.hpp>
+
 #include <entt/entt.hpp>
 
 namespace ECS
@@ -13,6 +15,7 @@ namespace ECS
 
     public:
         virtual void onUpdate(float deltaTime, entt::registry& registry) {}
+        virtual void onDraw(entt::registry& registry, sf::RenderWindow* wndPtr) {}
     };
 }
 

@@ -102,6 +102,7 @@ namespace Core
     {
         _factoryPtr->registerType<AssetTexture>("AssetTexture");
         _factoryPtr->registerType<AssetRenderLayers>("AssetRenderLayers");
+        _factoryPtr->registerType<AssetFont>("AssetFont");
 
         getDelegate()->onInitFactory(_factoryPtr);
     }
@@ -156,6 +157,7 @@ namespace Core
     void Application::onDraw(sf::RenderWindow* wndPtr)
     {
         _visualObjectsPtr->onDraw(wndPtr);
+        _ecsWorldPtr->onDraw(wndPtr);
 
         getDelegate()->onDraw(wndPtr);
     }
