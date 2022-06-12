@@ -32,7 +32,9 @@ namespace ECS
     {
         auto view = registry.view<TextComponent>();
         view.each([wndPtr](entt::entity entity, TextComponent& textComponent) {
-            wndPtr->draw(textComponent.object);
+            if (textComponent.isVisible) {
+                wndPtr->draw(textComponent.object);
+            }
         });
     }
 }

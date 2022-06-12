@@ -27,15 +27,23 @@ namespace ECS
             CellTextures blackCellTextures;
         };
 
+        struct CellFonts
+        {
+            std::string topFontAssetId;
+            std::string downFontAssetId;
+            std::string leftFontAssetId;
+            std::string rightFontAssetId;
+        };
+
     public:
         static entt::entity createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
-            const CellTextures& textures, const sf::Vector2i& size);
+            const CellTextures& textures, const sf::Vector2i& size, const CellFonts& cellFonts);
         static void createCellsBlock(const sf::Vector2f& startPosition, 
             CellComponent::Type startType, const sf::Vector2i& indexes, const CellsTextures& cellsTextures,
-            const sf::Vector2i& size);
+            const sf::Vector2i& size, const CellFonts& cellFonts);
         static void createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks, 
             const CellsTextures& cellsTextures,
-            const sf::Vector2i& size);
+            const sf::Vector2i& size, const CellFonts& cellFonts);
 
         static entt::entity getCellFromIndexes(const sf::Vector2i& indexes);
     };

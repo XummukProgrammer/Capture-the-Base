@@ -44,15 +44,15 @@ namespace Game
         cellsTextures.blackCellTextures.moveableAssetId = "Cell_Moveable";
         cellsTextures.blackCellTextures.selectedAssetId = "Cell_Selected";
 
-        ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 });
+        ECS::CellsUtils::CellFonts cellFonts;
+        cellFonts.topFontAssetId = "DefaultFont";
+        cellFonts.downFontAssetId = "DefaultFont";
+        cellFonts.leftFontAssetId = "DefaultFont";
+        cellFonts.rightFontAssetId = "DefaultFont";
+
+        ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 }, cellFonts);
 
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
-
-        ECS::TextsUtils::TextCreateInfo textCreateInfo;
-        textCreateInfo.fontAssetId = "DefaultFont";
-        textCreateInfo.text = "Hello, World!";
-        textCreateInfo.position.x = 100.f;
-        ECS::TextsUtils::createText(textCreateInfo);
     }
 }

@@ -18,8 +18,14 @@ namespace ECS
         entt::entity outlineDownEntity;
         entt::entity outlineLeftEntity;
         entt::entity outlineRightEntity;
+
         entt::entity moveableEntity;
         entt::entity selectedEntity;
+
+        entt::entity textTopEntity;
+        entt::entity textDownEntity;
+        entt::entity textLeftEntity;
+        entt::entity textRightEntity;
 
         sf::Vector2i indexes;
     };

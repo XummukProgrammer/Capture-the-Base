@@ -4,11 +4,14 @@
 
 #include <ecs/ECSWorld.hpp>
 #include <ecs/utils/VisualObjectsUtils.hpp>
+#include <ecs/utils/TextsUtils.hpp>
+
+#include <fmt/format.h>
 
 namespace ECS
 {
     entt::entity CellsUtils::createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
-        const CellTextures& textures, const sf::Vector2i& size)
+        const CellTextures& textures, const sf::Vector2i& size, const CellFonts& cellFonts)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -64,18 +67,38 @@ namespace ECS
         cellComponent.selectedEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
         VisualObjectsUtils::setTexture(cellComponent.selectedEntity, visualObjectTextureInfo);
 
+        // Top text
+        ECS::TextsUtils::TextCreateInfo textCreateInfo;
+        textCreateInfo.fontAssetId = cellFonts.topFontAssetId;
+        textCreateInfo.text = "a";
+        textCreateInfo.isVisible = false;
+        textCreateInfo.position = visualObjectCreateInfo.position - sf::Vector2f(-25.f, 25.f);
+        cellComponent.textTopEntity = ECS::TextsUtils::createText(textCreateInfo);
+
+        // Down text
+        textCreateInfo.position = visualObjectCreateInfo.position + sf::Vector2f(25.f, 60.f);
+        cellComponent.textDownEntity = ECS::TextsUtils::createText(textCreateInfo);
+
+        // Left text
+        textCreateInfo.position = visualObjectCreateInfo.position - sf::Vector2f(25.f, -25.f);
+        cellComponent.textLeftEntity = ECS::TextsUtils::createText(textCreateInfo);
+
+        // Right text
+        textCreateInfo.position = visualObjectCreateInfo.position + sf::Vector2f(75.f, 25.f);
+        cellComponent.textRightEntity = ECS::TextsUtils::createText(textCreateInfo);
+
         return cellEntity;
     }
 
     void CellsUtils::createCellsBlock(const sf::Vector2f& startPosition,
         CellComponent::Type startType, const sf::Vector2i& indexes, const CellsTextures& cellsTextures,
-        const sf::Vector2i& size)
+        const sf::Vector2i& size, const CellFonts& cellFonts)
     {
         const auto secondType = startType == CellComponent::Type::White ? CellComponent::Type::Black : CellComponent::Type::White;
 
-        auto createCellFn = [startPosition, indexes, &cellsTextures, size](const sf::Vector2i& indexesOffset, CellComponent::Type cellType) {
+        auto createCellFn = [startPosition, indexes, cellsTextures, size, cellFonts](const sf::Vector2i& indexesOffset, CellComponent::Type cellType) {
             auto& textures = cellType == CellComponent::Type::White ? cellsTextures.whiteCellTextures : cellsTextures.blackCellTextures;
-            createCell(startPosition, cellType, indexes + indexesOffset, textures, size);
+            createCell(startPosition, cellType, indexes + indexesOffset, textures, size, cellFonts);
         };
 
         createCellFn({ 0, 0 }, startType);
@@ -84,7 +107,7 @@ namespace ECS
 
     void CellsUtils::createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks,
         const CellsTextures& cellsTextures,
-        const sf::Vector2i& size)
+        const sf::Vector2i& size, const CellFonts& cellFonts)
     {
         // Create cells
         sf::Vector2i indexes = { 0, 0 };
@@ -93,7 +116,7 @@ namespace ECS
 
             for (int x = 0; x < blocks.x; ++x) {
                 indexes = { x * 2, y };
-                createCellsBlock(startPosition, startType, indexes, cellsTextures, size);
+                createCellsBlock(startPosition, startType, indexes, cellsTextures, size, cellFonts);
             }
         }
 
@@ -103,22 +126,36 @@ namespace ECS
         ++indexes.x;
 
         {
+            auto getCellTextIndexFn = [&indexes](const CellComponent& cellComponent) {
+                return std::to_string(indexes.y - cellComponent.indexes.y + 1);
+            };
+
+            auto getCellTextSymbolFn = [](const CellComponent& cellComponent) {
+                static char symbols[] = "abcdefgh";
+                return fmt::format("{}", symbols[cellComponent.indexes.x]);
+            };
+
             auto view = registry.view<CellComponent>();
-            view.each([&indexes](CellComponent& cellComponent) {
+            view.each([&indexes, getCellTextIndexFn, getCellTextSymbolFn](CellComponent& cellComponent) {
                 if (cellComponent.indexes.x == 0) {
                     VisualObjectsUtils::show(cellComponent.outlineLeftEntity);
+                    TextsUtils::showText(cellComponent.textLeftEntity, getCellTextIndexFn(cellComponent));
                 }
 
                 if (cellComponent.indexes.y == 0) {
                     VisualObjectsUtils::show(cellComponent.outlineTopEntity);
+                    TextsUtils::showText(cellComponent.textTopEntity, getCellTextSymbolFn(cellComponent));
                 }
 
                 if (cellComponent.indexes.x == indexes.x) {
                     VisualObjectsUtils::show(cellComponent.outlineRightEntity);
+                    TextsUtils::showText(cellComponent.textRightEntity, getCellTextIndexFn(cellComponent));
+
                 }
 
                 if (cellComponent.indexes.y == indexes.y) {
                     VisualObjectsUtils::show(cellComponent.outlineDownEntity);
+                    TextsUtils::showText(cellComponent.textDownEntity, getCellTextSymbolFn(cellComponent));
                 }
             });
         }

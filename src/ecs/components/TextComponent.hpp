@@ -10,6 +10,7 @@ namespace ECS
     struct TextComponent
     {
         sf::Text object;
+        bool isVisible = true;
 
         std::string fontAssetId;
         std::string text;
