@@ -32,6 +32,12 @@ namespace Core
 
     void VisualObject::loadFromAsset(std::string_view assetId)
     {
+        if (_assetId == assetId) {
+            return;
+        }
+
+        _assetId = assetId;
+
         if (auto asset = Application::getInstance().getAssets()->getAsset<AssetTexture>(assetId)) {
             _sprite.setTexture(*asset);
         }

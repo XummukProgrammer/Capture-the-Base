@@ -6,10 +6,11 @@
 #include <ecs/ECSWorld.hpp>
 #include <ecs/components/TransformComponent.hpp>
 #include <ecs/components/VisualObjectComponent.hpp>
+#include <ecs/components/TextureComponent.hpp>
 
 namespace ECS
 {
-    entt::entity RenderVisualObjectsECSUtils::createVisualObject(const VisualObjectCreateInfo& info)
+    entt::entity RenderVisualObjectsECSUtils::create(const VisualObjectCreateInfo& info)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
         entt::entity entity = registry.create();
@@ -23,11 +24,7 @@ namespace ECS
         ECS::VisualObjectComponent& visualObjectComponent = registry.emplace<ECS::VisualObjectComponent>(entity);
         
         auto visualObject = std::make_shared<Core::VisualObject>();
-        visualObject->loadFromAsset(info.assetId);
         
-        auto& sprite = visualObject->getSprite();
-        sprite.setTextureRect(info.textureRect);
-
         if (info.isVisible) {
             visualObject->show();
         } else {
@@ -41,7 +38,7 @@ namespace ECS
         return entity;
     }
 
-    void RenderVisualObjectsECSUtils::moveVisualObject(entt::entity entity, int newLayerId)
+    void RenderVisualObjectsECSUtils::move(entt::entity entity, int newLayerId)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -54,7 +51,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::moveUpVisualObject(entt::entity entity)
+    void RenderVisualObjectsECSUtils::moveUp(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -67,7 +64,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::moveDownVisualObject(entt::entity entity)
+    void RenderVisualObjectsECSUtils::moveDown(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -80,7 +77,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::removeVisualObject(entt::entity entity)
+    void RenderVisualObjectsECSUtils::remove(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -96,7 +93,7 @@ namespace ECS
         registry.destroy(entity);
     }
 
-    void RenderVisualObjectsECSUtils::showVisualObject(entt::entity entity)
+    void RenderVisualObjectsECSUtils::show(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -109,7 +106,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::hideVisualObject(entt::entity entity)
+    void RenderVisualObjectsECSUtils::hide(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -119,6 +116,28 @@ namespace ECS
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
             visualObjectComponent->visualObjectPtr->hide();
+        }
+    }
+
+    void RenderVisualObjectsECSUtils::setTexture(entt::entity entity, const VisualObjectTextureInfo& info)
+    {
+        entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        if (!registry.valid(entity)) {
+            return;
+        }
+
+        auto& textureComponent = registry.get_or_emplace<TextureComponent>(entity);
+        if (info.assetId) {
+            textureComponent.assetId = info.assetId.value();
+        }
+        if (info.rectangle) {
+            textureComponent.rectangle = info.rectangle.value();
+        }
+
+        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
+            visualObjectComponent->visualObjectPtr->loadFromAsset(textureComponent.assetId);
+            visualObjectComponent->visualObjectPtr->getSprite().setTextureRect(textureComponent.rectangle);
         }
     }
 }

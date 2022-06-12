@@ -32,6 +32,7 @@ namespace Core
         sf::Sprite _sprite;
         int _casheLayerId = 0;
         bool _isVisible = true;
+        std::string _assetId;
     };
 }
 

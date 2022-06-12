@@ -14,11 +14,13 @@ namespace ECS
 
         // Cell entity
         RenderVisualObjectsECSUtils::VisualObjectCreateInfo visualObjectCreateInfo;
-        visualObjectCreateInfo.assetId = textures.baseAssetId;
         visualObjectCreateInfo.layerName = "Cell";
-        visualObjectCreateInfo.textureRect = { 0, 0, size.x, size.y };
         visualObjectCreateInfo.position = { startPosition.x + indexes.x * size.x, startPosition.y + indexes.y * size.y };
-        auto cellEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::VisualObjectTextureInfo visualObjectTextureInfo;
+        visualObjectTextureInfo.assetId = textures.baseAssetId;
+        visualObjectTextureInfo.rectangle = { 0, 0, size.x, size.y };
+        auto cellEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellEntity, visualObjectTextureInfo);
 
         auto& cellComponent = registry.emplace<CellComponent>(cellEntity);
         cellComponent.type = type;
@@ -27,34 +29,40 @@ namespace ECS
         visualObjectCreateInfo.isVisible = false;
 
         // Outline top entity
-        visualObjectCreateInfo.assetId = textures.outlineTopAssetId;
+        visualObjectTextureInfo.assetId = textures.outlineTopAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineTopEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.outlineTopEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineTopEntity, visualObjectTextureInfo);
 
         // Outline down entity
-        visualObjectCreateInfo.assetId = textures.outlineDownAssetId;
+        visualObjectTextureInfo.assetId = textures.outlineDownAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineDownEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.outlineDownEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineDownEntity, visualObjectTextureInfo);
 
         // Outline left entity
-        visualObjectCreateInfo.assetId = textures.outlineLeftAssetId;
+        visualObjectTextureInfo.assetId = textures.outlineLeftAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineLeftEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.outlineLeftEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineLeftEntity, visualObjectTextureInfo);
 
         // Outline right entity
-        visualObjectCreateInfo.assetId = textures.outlineRightAssetId;
+        visualObjectTextureInfo.assetId = textures.outlineRightAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineRightEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.outlineRightEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineRightEntity, visualObjectTextureInfo);
 
         // Moveable
-        visualObjectCreateInfo.assetId = textures.moveableAssetId;
+        visualObjectTextureInfo.assetId = textures.moveableAssetId;
         visualObjectCreateInfo.layerName = "CellMoveable";
-        cellComponent.moveableEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.moveableEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.moveableEntity, visualObjectTextureInfo);
 
         // Selected
-        visualObjectCreateInfo.assetId = textures.selectedAssetId;
+        visualObjectTextureInfo.assetId = textures.selectedAssetId;
         visualObjectCreateInfo.layerName = "CellSelected";
-        cellComponent.selectedEntity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        cellComponent.selectedEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(cellComponent.selectedEntity, visualObjectTextureInfo);
 
         return cellEntity;
     }
@@ -98,19 +106,19 @@ namespace ECS
             auto view = registry.view<CellComponent>();
             view.each([&indexes](CellComponent& cellComponent) {
                 if (cellComponent.indexes.x == 0) {
-                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineLeftEntity);
+                    RenderVisualObjectsECSUtils::show(cellComponent.outlineLeftEntity);
                 }
 
                 if (cellComponent.indexes.y == 0) {
-                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineTopEntity);
+                    RenderVisualObjectsECSUtils::show(cellComponent.outlineTopEntity);
                 }
 
                 if (cellComponent.indexes.x == indexes.x) {
-                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineRightEntity);
+                    RenderVisualObjectsECSUtils::show(cellComponent.outlineRightEntity);
                 }
 
                 if (cellComponent.indexes.y == indexes.y) {
-                    RenderVisualObjectsECSUtils::showVisualObject(cellComponent.outlineDownEntity);
+                    RenderVisualObjectsECSUtils::show(cellComponent.outlineDownEntity);
                 }
             });
         }

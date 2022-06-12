@@ -13,6 +13,7 @@ set(GAME_HEADERS
 	src/ecs/ECSWorld.hpp
 	src/ecs/components/TransformComponent.hpp
 	src/ecs/components/VisualObjectComponent.hpp
+	src/ecs/components/TextureComponent.hpp
 	src/ecs/components/CellComponent.hpp
 	src/ecs/components/ChipComponent.hpp
 	src/ecs/systems/System.hpp
@@ -42,6 +43,7 @@ set(GAME_SOURCES
 	src/ecs/ECSWorld.cpp
 	src/ecs/components/TransformComponent.cpp
 	src/ecs/components/VisualObjectComponent.cpp
+	src/ecs/components/TextureComponent.cpp
 	src/ecs/components/CellComponent.cpp
 	src/ecs/components/ChipComponent.cpp
 	src/ecs/systems/System.cpp

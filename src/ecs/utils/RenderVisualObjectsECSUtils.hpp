@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <string>
+#include <optional>
 
 namespace ECS
 {
@@ -13,22 +14,27 @@ namespace ECS
     public:
         struct VisualObjectCreateInfo
         {
-            std::string assetId;
             std::string layerName = "Default";
             sf::Vector2f position = { 0.f, 0.f };
             sf::Vector2f scale = { 1.f, 1.f };
             float rotation = 0.f;
-            sf::IntRect textureRect = { 0, 0, 32, 32 };
             bool isVisible = true;
         };
 
-        static entt::entity createVisualObject(const VisualObjectCreateInfo& info);
-        static void moveVisualObject(entt::entity entity, int newLayerId);
-        static void moveUpVisualObject(entt::entity entity);
-        static void moveDownVisualObject(entt::entity entity);
-        static void removeVisualObject(entt::entity entity);
-        static void showVisualObject(entt::entity entity);
-        static void hideVisualObject(entt::entity entity);
+        struct VisualObjectTextureInfo
+        {
+            std::optional<std::string> assetId;
+            std::optional<sf::IntRect> rectangle;
+        };
+
+        static entt::entity create(const VisualObjectCreateInfo& info);
+        static void move(entt::entity entity, int newLayerId);
+        static void moveUp(entt::entity entity);
+        static void moveDown(entt::entity entity);
+        static void remove(entt::entity entity);
+        static void show(entt::entity entity);
+        static void hide(entt::entity entity);
+        static void setTexture(entt::entity entity, const VisualObjectTextureInfo& info);
 
     };
 }

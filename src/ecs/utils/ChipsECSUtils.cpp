@@ -27,11 +27,13 @@ namespace ECS
         }
 
         RenderVisualObjectsECSUtils::VisualObjectCreateInfo visualObjectCreateInfo;
-        visualObjectCreateInfo.assetId = textureAssetId;
         visualObjectCreateInfo.layerName = "Chip";
-        visualObjectCreateInfo.textureRect = { 0, 0, size.x, size.y };
         visualObjectCreateInfo.position = position;
-        auto entity = RenderVisualObjectsECSUtils::createVisualObject(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::VisualObjectTextureInfo visualObjectTextureInfo;
+        visualObjectTextureInfo.assetId = textureAssetId;
+        visualObjectTextureInfo.rectangle = { 0, 0, size.x, size.y };
+        auto entity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
+        RenderVisualObjectsECSUtils::setTexture(entity, visualObjectTextureInfo);
 
         auto& chipComponent = registry.emplace<ChipComponent>(entity);
         chipComponent.type = type;
