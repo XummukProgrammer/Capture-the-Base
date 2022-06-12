@@ -4,7 +4,7 @@ set(GAME_HEADERS
 	src/core/Asset.hpp
 	src/core/Assets.hpp
 	src/core/Factory.hpp
-	src/core/RenderVisualObjects.hpp
+	src/core/VisualObjects.hpp
 	src/core/State.hpp
 	src/core/States.hpp
 	src/core/VisualObject.hpp
@@ -34,7 +34,7 @@ set(GAME_SOURCES
 	src/core/Asset.cpp
 	src/core/Assets.cpp
 	src/core/Factory.cpp
-	src/core/RenderVisualObjects.cpp
+	src/core/VisualObjects.cpp
 	src/core/State.cpp
 	src/core/States.cpp
 	src/core/VisualObject.cpp

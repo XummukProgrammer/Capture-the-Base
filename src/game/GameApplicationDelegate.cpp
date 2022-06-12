@@ -1,7 +1,6 @@
 #include "GameApplicationDelegate.hpp"
 
 #include <core/States.hpp>
-#include <core/RenderVisualObjects.hpp>
 
 #include <game/GameState.hpp>
 

@@ -19,7 +19,7 @@ namespace Core
     class Assets;
     class Factory;
     class States;
-    class RenderVisualObjects;
+    class VisualObjects;
 
     class ApplicationDelegate
     {
@@ -32,7 +32,7 @@ namespace Core
         virtual void onInitAssets(Assets* assetsPtr) {}
         virtual void onInitFactory(Factory* factoryPtr) {}
         virtual void onInitStates(States* statesPtr) {}
-        virtual void onInitRenderVisualObjects(RenderVisualObjects* renderVisualObjectsPtr) {}
+        virtual void onInitRenderVisualObjects(VisualObjects* visualObjectsPtr) {}
         virtual void onInitECSWorld(ECS::World* worldPtr) {}
 
         virtual void onUpdate(float deltaTime) {}
@@ -60,7 +60,7 @@ namespace Core
         Assets* getAssets() const;
         Factory* getFactory() const;
         States* getStates() const;
-        RenderVisualObjects* getRenderVisualObjects() const;
+        VisualObjects* getVisualObjects() const;
         ECS::World* getECSWorld() const;
         const std::string& getExecuteDir() const;
 
@@ -99,7 +99,7 @@ namespace Core
         Assets* _assetsPtr = nullptr;
         Factory* _factoryPtr = nullptr;
         States* _statesPtr = nullptr;
-        RenderVisualObjects* _renderVisualObjectsPtr = nullptr;
+        VisualObjects* _visualObjectsPtr = nullptr;
         ECS::World* _ecsWorldPtr = nullptr;
         std::string _executeDir;
     };

@@ -4,7 +4,7 @@
 #include "Assets.hpp"
 #include "Factory.hpp"
 #include "States.hpp"
-#include "RenderVisualObjects.hpp"
+#include "VisualObjects.hpp"
 
 #include <ecs/ECSWorld.hpp>
 
@@ -19,7 +19,7 @@ namespace Core
         , _assetsPtr(new Assets)
         , _factoryPtr(new Factory)
         , _statesPtr(new States)
-        , _renderVisualObjectsPtr(new RenderVisualObjects)
+        , _visualObjectsPtr(new VisualObjects)
         , _ecsWorldPtr(new ECS::World)
     {
 
@@ -123,12 +123,12 @@ namespace Core
 
     void Application::initRenderVisualObjects()
     {
-        getDelegate()->onInitRenderVisualObjects(_renderVisualObjectsPtr);
+        getDelegate()->onInitRenderVisualObjects(_visualObjectsPtr);
     }
 
     void Application::destroyRenderVisualObjects()
     {
-        delete _renderVisualObjectsPtr;
+        delete _visualObjectsPtr;
     }
 
     void Application::initECSWorld()
@@ -148,14 +148,14 @@ namespace Core
     {
         _statesPtr->onUpdate(deltaTime);
         _ecsWorldPtr->onUpdate(deltaTime);
-        _renderVisualObjectsPtr->onUpdate(deltaTime);
+        _visualObjectsPtr->onUpdate(deltaTime);
 
         getDelegate()->onUpdate(deltaTime);
     }
 
     void Application::onDraw(sf::RenderWindow* wndPtr)
     {
-        _renderVisualObjectsPtr->onDraw(wndPtr);
+        _visualObjectsPtr->onDraw(wndPtr);
 
         getDelegate()->onDraw(wndPtr);
     }
@@ -190,9 +190,9 @@ namespace Core
         return _statesPtr;
     }
 
-    RenderVisualObjects* Application::getRenderVisualObjects() const
+    VisualObjects* Application::getVisualObjects() const
     {
-        return _renderVisualObjectsPtr;
+        return _visualObjectsPtr;
     }
 
     ECS::World* Application::getECSWorld() const

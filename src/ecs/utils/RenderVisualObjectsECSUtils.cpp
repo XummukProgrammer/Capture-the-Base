@@ -1,7 +1,7 @@
 #include "RenderVisualObjectsECSUtils.hpp"
 
 #include <core/Application.hpp>
-#include <core/RenderVisualObjects.hpp>
+#include <core/VisualObjects.hpp>
 
 #include <ecs/ECSWorld.hpp>
 #include <ecs/components/TransformComponent.hpp>
@@ -33,7 +33,7 @@ namespace ECS
 
         visualObjectComponent.visualObjectPtr = visualObject;
 
-        Core::Application::getInstance().getRenderVisualObjects()->addVisualObject(visualObjectComponent.visualObjectPtr, info.layerName);
+        Core::Application::getInstance().getVisualObjects()->add(visualObjectComponent.visualObjectPtr, info.layerName);
 
         return entity;
     }
@@ -47,7 +47,7 @@ namespace ECS
         }
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getRenderVisualObjects()->moveVisualObject(visualObjectComponent->visualObjectPtr, newLayerId);
+            Core::Application::getInstance().getVisualObjects()->move(visualObjectComponent->visualObjectPtr, newLayerId);
         }
     }
 
@@ -60,7 +60,7 @@ namespace ECS
         }
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getRenderVisualObjects()->moveUpVisualObject(visualObjectComponent->visualObjectPtr);
+            Core::Application::getInstance().getVisualObjects()->moveUp(visualObjectComponent->visualObjectPtr);
         }
     }
 
@@ -73,7 +73,7 @@ namespace ECS
         }
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getRenderVisualObjects()->moveDownVisualObject(visualObjectComponent->visualObjectPtr);
+            Core::Application::getInstance().getVisualObjects()->moveDown(visualObjectComponent->visualObjectPtr);
         }
     }
 
@@ -86,7 +86,7 @@ namespace ECS
         }
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getRenderVisualObjects()->removeVisualObject(visualObjectComponent->visualObjectPtr);
+            Core::Application::getInstance().getVisualObjects()->remove(visualObjectComponent->visualObjectPtr);
             visualObjectComponent->visualObjectPtr.reset();
         }
 

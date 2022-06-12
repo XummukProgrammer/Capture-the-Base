@@ -1,45 +1,45 @@
-#include "RenderVisualObjects.hpp"
+#include "VisualObjects.hpp"
 
 #include <core/Application.hpp>
 #include <core/Assets.hpp>
 
 namespace Core
 {
-    void RenderVisualObjects::addVisualObject(const VisualObjectPtr& visualObjectPtr, int layerId)
+    void VisualObjects::add(const VisualObjectPtr& visualObjectPtr, int layerId)
     {
         _layers[layerId].push_back(visualObjectPtr);
         visualObjectPtr->setCasheLayerId(layerId);
     }
 
-    void RenderVisualObjects::addVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
+    void VisualObjects::add(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
     {
-        addVisualObject(visualObjectPtr, getLayerIdFromName(layerName));
+        add(visualObjectPtr, getLayerIdFromName(layerName));
     }
 
-    void RenderVisualObjects::moveVisualObject(const VisualObjectPtr& visualObjectPtr, int newLayerId)
+    void VisualObjects::move(const VisualObjectPtr& visualObjectPtr, int newLayerId)
     {
-        removeVisualObject(visualObjectPtr);
-        addVisualObject(visualObjectPtr, newLayerId);
+        remove(visualObjectPtr);
+        add(visualObjectPtr, newLayerId);
     }
 
-    void RenderVisualObjects::moveVisualObject(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
+    void VisualObjects::move(const VisualObjectPtr& visualObjectPtr, const std::string& layerName)
     {
-        moveVisualObject(visualObjectPtr, getLayerIdFromName(layerName));
+        move(visualObjectPtr, getLayerIdFromName(layerName));
     }
 
-    void RenderVisualObjects::moveUpVisualObject(const VisualObjectPtr& visualObjectPtr)
-    {
-        const int casheLayerId = visualObjectPtr->getCasheLayerId();
-        moveVisualObject(visualObjectPtr, casheLayerId + 1);
-    }
-
-    void RenderVisualObjects::moveDownVisualObject(const VisualObjectPtr& visualObjectPtr)
+    void VisualObjects::moveUp(const VisualObjectPtr& visualObjectPtr)
     {
         const int casheLayerId = visualObjectPtr->getCasheLayerId();
-        moveVisualObject(visualObjectPtr, casheLayerId - 1);
+        move(visualObjectPtr, casheLayerId + 1);
     }
 
-    void RenderVisualObjects::removeVisualObject(const VisualObjectPtr& visualObjectPtr)
+    void VisualObjects::moveDown(const VisualObjectPtr& visualObjectPtr)
+    {
+        const int casheLayerId = visualObjectPtr->getCasheLayerId();
+        move(visualObjectPtr, casheLayerId - 1);
+    }
+
+    void VisualObjects::remove(const VisualObjectPtr& visualObjectPtr)
     {
         const int casheLayerId = visualObjectPtr->getCasheLayerId();
         auto layerIt = _layers.find(casheLayerId);
@@ -55,7 +55,7 @@ namespace Core
         }
     }
 
-    int RenderVisualObjects::getLayerIdFromName(const std::string& layerName)
+    int VisualObjects::getLayerIdFromName(const std::string& layerName)
     {
         if (auto asset = Application::getInstance().getAssets()->getOriginAsset<AssetRenderLayers>("RenderLayers")) {
             return asset->getLayerIdFromName(layerName);
@@ -63,11 +63,11 @@ namespace Core
         return 0;
     }
 
-    void RenderVisualObjects::onUpdate(float deltaTime)
+    void VisualObjects::onUpdate(float deltaTime)
     {
     }
 
-    void RenderVisualObjects::onDraw(sf::RenderWindow* wndPtr)
+    void VisualObjects::onDraw(sf::RenderWindow* wndPtr)
     {
         for (const auto& [ layerId, visualObjects ] : _layers) {
             for (const auto& visualObjectPtr : visualObjects) {
