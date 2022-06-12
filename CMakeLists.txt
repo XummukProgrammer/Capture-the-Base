@@ -17,7 +17,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/fmt" "${CMAKE_CURRENT_BINARY_
 set_target_properties(fmt PROPERTIES FOLDER "libs")
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/entt" "${CMAKE_CURRENT_BINARY_DIR}/libs/entt")
-set_target_properties(EnTT PROPERTIES FOLDER "libs")
+set_target_properties(aob PROPERTIES FOLDER "libs")
 
 include(cmake/src.cmake)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${GAME_HEADERS} ${GAME_SOURCES})
