@@ -14,18 +14,18 @@ namespace ECS
         };
         Type type;
 
-        entt::entity outlineTopEntity;
-        entt::entity outlineDownEntity;
-        entt::entity outlineLeftEntity;
-        entt::entity outlineRightEntity;
+        entt::entity outlineTopEntity = entt::null;
+        entt::entity outlineDownEntity = entt::null;
+        entt::entity outlineLeftEntity = entt::null;
+        entt::entity outlineRightEntity = entt::null;
 
-        entt::entity moveableEntity;
-        entt::entity selectedEntity;
+        entt::entity moveableEntity = entt::null;
+        entt::entity selectedEntity = entt::null;
 
-        entt::entity textTopEntity;
-        entt::entity textDownEntity;
-        entt::entity textLeftEntity;
-        entt::entity textRightEntity;
+        entt::entity textTopEntity = entt::null;
+        entt::entity textDownEntity = entt::null;
+        entt::entity textLeftEntity = entt::null;
+        entt::entity textRightEntity = entt::null;
 
         sf::Vector2i indexes;
     };

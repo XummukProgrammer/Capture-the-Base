@@ -37,15 +37,19 @@ namespace ECS
 
     public:
         static entt::entity createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
-            const CellTextures& textures, const sf::Vector2i& size, const CellFonts& cellFonts);
+            const CellTextures& textures, const sf::Vector2i& size, const CellFonts& cellFonts, const sf::Vector2i& maxIndexes);
         static void createCellsBlock(const sf::Vector2f& startPosition, 
             CellComponent::Type startType, const sf::Vector2i& indexes, const CellsTextures& cellsTextures,
-            const sf::Vector2i& size, const CellFonts& cellFonts);
+            const sf::Vector2i& size, const CellFonts& cellFonts, const sf::Vector2i& maxIndexes);
         static void createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks, 
             const CellsTextures& cellsTextures,
             const sf::Vector2i& size, const CellFonts& cellFonts);
 
         static entt::entity getCellFromIndexes(const sf::Vector2i& indexes);
+
+    private:
+        static std::string getCellTextIndex(int maxY, int cellY);
+        static std::string getCellSymbol(int cellX);
     };
 }
 
