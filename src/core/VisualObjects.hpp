@@ -24,8 +24,6 @@ namespace Core
         void add(const VisualObjectPtr& visualObjectPtr, const std::string& layerName = "Default");
         void move(const VisualObjectPtr& visualObjectPtr, int newLayerId = 0);
         void move(const VisualObjectPtr& visualObjectPtr, const std::string& layerName = "Default");
-        void moveUp(const VisualObjectPtr& visualObjectPtr);
-        void moveDown(const VisualObjectPtr& visualObjectPtr);
         void remove(const VisualObjectPtr& visualObjectPtr);
 
     private:

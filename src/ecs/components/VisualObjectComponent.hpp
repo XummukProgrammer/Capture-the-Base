@@ -14,6 +14,11 @@ namespace ECS
         // Visual object pointer
         VisualObjectPtr visualObjectPtr;
     };
+
+    struct UpdateVisualObjectComponent
+    {
+        bool _;
+    };
 }
 
 #endif // __VISUAL_OBJECT_COMPONENT_INCLUDE_FILE__

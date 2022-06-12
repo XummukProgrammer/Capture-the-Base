@@ -10,22 +10,22 @@
 
 namespace ECS
 {
-    entt::entity VisualObjectsUtils::create(const VisualObjectCreateInfo& info)
+    entt::entity VisualObjectsUtils::create(const VisualObjectCreateInfo& objectInfo, const VisualObjectTextureInfo& textureInfo)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
         entt::entity entity = registry.create();
 
         ECS::TransformComponent& transformComponent = registry.emplace<ECS::TransformComponent>(entity);
-        transformComponent.position = info.position;
-        transformComponent.scale = info.scale;
-        transformComponent.rotation = info.rotation;
+        transformComponent.position = objectInfo.position;
+        transformComponent.scale = objectInfo.scale;
+        transformComponent.rotation = objectInfo.rotation;
 
         // Load Visual Object
         ECS::VisualObjectComponent& visualObjectComponent = registry.emplace<ECS::VisualObjectComponent>(entity);
         
         auto visualObject = std::make_shared<Core::VisualObject>();
         
-        if (info.isVisible) {
+        if (objectInfo.isVisible) {
             visualObject->show();
         } else {
             visualObject->hide();
@@ -33,7 +33,10 @@ namespace ECS
 
         visualObjectComponent.visualObjectPtr = visualObject;
 
-        Core::Application::getInstance().getVisualObjects()->add(visualObjectComponent.visualObjectPtr, info.layerName);
+        updateTexture(entity, textureInfo);
+        //registry.emplace<UpdateVisualObjectComponent>(entity);
+
+        Core::Application::getInstance().getVisualObjects()->add(visualObjectComponent.visualObjectPtr, objectInfo.layerName);
 
         return entity;
     }
@@ -48,32 +51,6 @@ namespace ECS
 
         if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
             Core::Application::getInstance().getVisualObjects()->move(visualObjectComponent->visualObjectPtr, newLayerId);
-        }
-    }
-
-    void VisualObjectsUtils::moveUp(entt::entity entity)
-    {
-        entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
-
-        if (!registry.valid(entity)) {
-            return;
-        }
-
-        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getVisualObjects()->moveUp(visualObjectComponent->visualObjectPtr);
-        }
-    }
-
-    void VisualObjectsUtils::moveDown(entt::entity entity)
-    {
-        entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
-
-        if (!registry.valid(entity)) {
-            return;
-        }
-
-        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            Core::Application::getInstance().getVisualObjects()->moveDown(visualObjectComponent->visualObjectPtr);
         }
     }
 
@@ -119,7 +96,7 @@ namespace ECS
         }
     }
 
-    void VisualObjectsUtils::setTexture(entt::entity entity, const VisualObjectTextureInfo& info)
+    void VisualObjectsUtils::updateTexture(entt::entity entity, const VisualObjectTextureInfo& info)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -135,9 +112,6 @@ namespace ECS
             textureComponent.rectangle = info.rectangle.value();
         }
 
-        if (auto visualObjectComponent = registry.try_get<ECS::VisualObjectComponent>(entity)) {
-            visualObjectComponent->visualObjectPtr->loadFromAsset(textureComponent.assetId);
-            visualObjectComponent->visualObjectPtr->getSprite().setTextureRect(textureComponent.rectangle);
-        }
+        registry.emplace_or_replace<UpdateVisualObjectComponent>(entity);
     }
 }

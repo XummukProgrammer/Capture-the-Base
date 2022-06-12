@@ -32,8 +32,7 @@ namespace ECS
         VisualObjectsUtils::VisualObjectTextureInfo visualObjectTextureInfo;
         visualObjectTextureInfo.assetId = textureAssetId;
         visualObjectTextureInfo.rectangle = { 0, 0, size.x, size.y };
-        auto entity = VisualObjectsUtils::create(visualObjectCreateInfo);
-        VisualObjectsUtils::setTexture(entity, visualObjectTextureInfo);
+        auto entity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
         auto& chipComponent = registry.emplace<ChipComponent>(entity);
         chipComponent.type = type;

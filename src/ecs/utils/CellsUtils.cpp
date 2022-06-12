@@ -22,8 +22,7 @@ namespace ECS
         VisualObjectsUtils::VisualObjectTextureInfo visualObjectTextureInfo;
         visualObjectTextureInfo.assetId = textures.baseAssetId;
         visualObjectTextureInfo.rectangle = { 0, 0, size.x, size.y };
-        auto cellEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-        VisualObjectsUtils::setTexture(cellEntity, visualObjectTextureInfo);
+        auto cellEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
         auto& cellComponent = registry.emplace<CellComponent>(cellEntity);
         cellComponent.type = type;
@@ -35,8 +34,7 @@ namespace ECS
             // Outline left entity
             visualObjectTextureInfo.assetId = textures.outlineLeftAssetId;
             visualObjectCreateInfo.layerName = "CellOutline";
-            cellComponent.outlineLeftEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-            VisualObjectsUtils::setTexture(cellComponent.outlineLeftEntity, visualObjectTextureInfo);
+            cellComponent.outlineLeftEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
             // Left text
             textCreateInfo.fontAssetId = cellFonts.leftFontAssetId;
@@ -49,8 +47,7 @@ namespace ECS
             // Outline top entity
             visualObjectTextureInfo.assetId = textures.outlineTopAssetId;
             visualObjectCreateInfo.layerName = "CellOutline";
-            cellComponent.outlineTopEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-            VisualObjectsUtils::setTexture(cellComponent.outlineTopEntity, visualObjectTextureInfo);
+            cellComponent.outlineTopEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
             // Top text
             textCreateInfo.fontAssetId = cellFonts.topFontAssetId;
@@ -63,8 +60,7 @@ namespace ECS
             // Outline right entity
             visualObjectTextureInfo.assetId = textures.outlineRightAssetId;
             visualObjectCreateInfo.layerName = "CellOutline";
-            cellComponent.outlineRightEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-            VisualObjectsUtils::setTexture(cellComponent.outlineRightEntity, visualObjectTextureInfo);
+            cellComponent.outlineRightEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
             // Right text
             textCreateInfo.fontAssetId = cellFonts.rightFontAssetId;
@@ -77,8 +73,7 @@ namespace ECS
             // Outline down entity
             visualObjectTextureInfo.assetId = textures.outlineDownAssetId;
             visualObjectCreateInfo.layerName = "CellOutline";
-            cellComponent.outlineDownEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-            VisualObjectsUtils::setTexture(cellComponent.outlineDownEntity, visualObjectTextureInfo);
+            cellComponent.outlineDownEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
             // Down text
             textCreateInfo.fontAssetId = cellFonts.downFontAssetId;
@@ -92,14 +87,12 @@ namespace ECS
         // Moveable
         visualObjectTextureInfo.assetId = textures.moveableAssetId;
         visualObjectCreateInfo.layerName = "CellMoveable";
-        cellComponent.moveableEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-        VisualObjectsUtils::setTexture(cellComponent.moveableEntity, visualObjectTextureInfo);
+        cellComponent.moveableEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
         // Selected
         visualObjectTextureInfo.assetId = textures.selectedAssetId;
         visualObjectCreateInfo.layerName = "CellSelected";
-        cellComponent.selectedEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
-        VisualObjectsUtils::setTexture(cellComponent.selectedEntity, visualObjectTextureInfo);
+        cellComponent.selectedEntity = VisualObjectsUtils::create(visualObjectCreateInfo, visualObjectTextureInfo);
 
         return cellEntity;
     }

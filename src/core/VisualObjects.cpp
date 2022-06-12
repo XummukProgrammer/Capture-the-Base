@@ -27,18 +27,6 @@ namespace Core
         move(visualObjectPtr, getLayerIdFromName(layerName));
     }
 
-    void VisualObjects::moveUp(const VisualObjectPtr& visualObjectPtr)
-    {
-        const int casheLayerId = visualObjectPtr->getCasheLayerId();
-        move(visualObjectPtr, casheLayerId + 1);
-    }
-
-    void VisualObjects::moveDown(const VisualObjectPtr& visualObjectPtr)
-    {
-        const int casheLayerId = visualObjectPtr->getCasheLayerId();
-        move(visualObjectPtr, casheLayerId - 1);
-    }
-
     void VisualObjects::remove(const VisualObjectPtr& visualObjectPtr)
     {
         const int casheLayerId = visualObjectPtr->getCasheLayerId();

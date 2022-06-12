@@ -27,15 +27,12 @@ namespace ECS
             std::optional<sf::IntRect> rectangle;
         };
 
-        static entt::entity create(const VisualObjectCreateInfo& info);
+        static entt::entity create(const VisualObjectCreateInfo& objectInfo, const VisualObjectTextureInfo& textureInfo);
         static void move(entt::entity entity, int newLayerId);
-        static void moveUp(entt::entity entity);
-        static void moveDown(entt::entity entity);
         static void remove(entt::entity entity);
         static void show(entt::entity entity);
         static void hide(entt::entity entity);
-        static void setTexture(entt::entity entity, const VisualObjectTextureInfo& info);
-
+        static void updateTexture(entt::entity entity, const VisualObjectTextureInfo& info);
     };
 }
 
