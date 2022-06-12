@@ -1,5 +1,5 @@
-#ifndef __RENDER_VISUAL_OBJECTS_ECS_UTILS_INCLUDE_FILE__
-#define __RENDER_VISUAL_OBJECTS_ECS_UTILS_INCLUDE_FILE__
+#ifndef __VISUAL_OBJECTS_UTILS_INCLUDE_FILE__
+#define __VISUAL_OBJECTS_UTILS_INCLUDE_FILE__
 
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
@@ -9,7 +9,7 @@
 
 namespace ECS
 {
-    class RenderVisualObjectsECSUtils final
+    class VisualObjectsUtils final
     {
     public:
         struct VisualObjectCreateInfo
@@ -39,4 +39,4 @@ namespace ECS
     };
 }
 
-#endif // __RENDER_VISUAL_OBJECTS_ECS_UTILS_INCLUDE_FILE__
+#endif // __VISUAL_OBJECTS_UTILS_INCLUDE_FILE__

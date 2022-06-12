@@ -5,8 +5,8 @@
 #include <game/GameState.hpp>
 
 #include <ecs/ECSWorld.hpp>
-#include <ecs/utils/CellsECSUtils.hpp>
-#include <ecs/utils/ChipsECSUtils.hpp>
+#include <ecs/utils/CellsUtils.hpp>
+#include <ecs/utils/ChipsUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 
 namespace Game
@@ -23,7 +23,7 @@ namespace Game
     {
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
 
-        ECS::CellsECSUtils::CellsTextures cellsTextures;
+        ECS::CellsUtils::CellsTextures cellsTextures;
         cellsTextures.whiteCellTextures.baseAssetId = "Cell_White";
         cellsTextures.whiteCellTextures.outlineTopAssetId = "Cell_Outline_Top";
         cellsTextures.whiteCellTextures.outlineDownAssetId = "Cell_Outline_Down";
@@ -40,8 +40,8 @@ namespace Game
         cellsTextures.blackCellTextures.moveableAssetId = "Cell_Moveable";
         cellsTextures.blackCellTextures.selectedAssetId = "Cell_Selected";
 
-        ECS::CellsECSUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 });
+        ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 });
 
-        ECS::ChipsECSUtils::createChip(ECS::ChipComponent::Type::White, { 1, 0 }, "Chip_White", { 64, 64 });
+        ECS::ChipsUtils::createChip(ECS::ChipComponent::Type::White, { 1, 0 }, "Chip_White", { 64, 64 });
     }
 }

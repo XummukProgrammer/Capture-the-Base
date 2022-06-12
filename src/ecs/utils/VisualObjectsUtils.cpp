@@ -1,4 +1,4 @@
-#include "RenderVisualObjectsECSUtils.hpp"
+#include "VisualObjectsUtils.hpp"
 
 #include <core/Application.hpp>
 #include <core/VisualObjects.hpp>
@@ -10,7 +10,7 @@
 
 namespace ECS
 {
-    entt::entity RenderVisualObjectsECSUtils::create(const VisualObjectCreateInfo& info)
+    entt::entity VisualObjectsUtils::create(const VisualObjectCreateInfo& info)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
         entt::entity entity = registry.create();
@@ -38,7 +38,7 @@ namespace ECS
         return entity;
     }
 
-    void RenderVisualObjectsECSUtils::move(entt::entity entity, int newLayerId)
+    void VisualObjectsUtils::move(entt::entity entity, int newLayerId)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -51,7 +51,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::moveUp(entt::entity entity)
+    void VisualObjectsUtils::moveUp(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -64,7 +64,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::moveDown(entt::entity entity)
+    void VisualObjectsUtils::moveDown(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -77,7 +77,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::remove(entt::entity entity)
+    void VisualObjectsUtils::remove(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -93,7 +93,7 @@ namespace ECS
         registry.destroy(entity);
     }
 
-    void RenderVisualObjectsECSUtils::show(entt::entity entity)
+    void VisualObjectsUtils::show(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -106,7 +106,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::hide(entt::entity entity)
+    void VisualObjectsUtils::hide(entt::entity entity)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -119,7 +119,7 @@ namespace ECS
         }
     }
 
-    void RenderVisualObjectsECSUtils::setTexture(entt::entity entity, const VisualObjectTextureInfo& info)
+    void VisualObjectsUtils::setTexture(entt::entity entity, const VisualObjectTextureInfo& info)
     {
         entt::registry& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 

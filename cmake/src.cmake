@@ -19,9 +19,9 @@ set(GAME_HEADERS
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
-	src/ecs/utils/RenderVisualObjectsECSUtils.hpp
-	src/ecs/utils/CellsECSUtils.hpp
-	src/ecs/utils/ChipsECSUtils.hpp
+	src/ecs/utils/VisualObjectsUtils.hpp
+	src/ecs/utils/CellsUtils.hpp
+	src/ecs/utils/ChipsUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -49,9 +49,9 @@ set(GAME_SOURCES
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
-	src/ecs/utils/RenderVisualObjectsECSUtils.cpp
-	src/ecs/utils/CellsECSUtils.cpp
-	src/ecs/utils/ChipsECSUtils.cpp
+	src/ecs/utils/VisualObjectsUtils.cpp
+	src/ecs/utils/CellsUtils.cpp
+	src/ecs/utils/ChipsUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

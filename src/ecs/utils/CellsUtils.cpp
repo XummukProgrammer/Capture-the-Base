@@ -1,26 +1,26 @@
-#include "CellsECSUtils.hpp"
+#include "CellsUtils.hpp"
 
 #include <core/Application.hpp>
 
 #include <ecs/ECSWorld.hpp>
-#include <ecs/utils/RenderVisualObjectsECSUtils.hpp>
+#include <ecs/utils/VisualObjectsUtils.hpp>
 
 namespace ECS
 {
-    entt::entity CellsECSUtils::createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
+    entt::entity CellsUtils::createCell(const sf::Vector2f& startPosition, CellComponent::Type type, const sf::Vector2i& indexes,
         const CellTextures& textures, const sf::Vector2i& size)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
         // Cell entity
-        RenderVisualObjectsECSUtils::VisualObjectCreateInfo visualObjectCreateInfo;
+        VisualObjectsUtils::VisualObjectCreateInfo visualObjectCreateInfo;
         visualObjectCreateInfo.layerName = "Cell";
         visualObjectCreateInfo.position = { startPosition.x + indexes.x * size.x, startPosition.y + indexes.y * size.y };
-        RenderVisualObjectsECSUtils::VisualObjectTextureInfo visualObjectTextureInfo;
+        VisualObjectsUtils::VisualObjectTextureInfo visualObjectTextureInfo;
         visualObjectTextureInfo.assetId = textures.baseAssetId;
         visualObjectTextureInfo.rectangle = { 0, 0, size.x, size.y };
-        auto cellEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellEntity, visualObjectTextureInfo);
+        auto cellEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellEntity, visualObjectTextureInfo);
 
         auto& cellComponent = registry.emplace<CellComponent>(cellEntity);
         cellComponent.type = type;
@@ -31,43 +31,43 @@ namespace ECS
         // Outline top entity
         visualObjectTextureInfo.assetId = textures.outlineTopAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineTopEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineTopEntity, visualObjectTextureInfo);
+        cellComponent.outlineTopEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.outlineTopEntity, visualObjectTextureInfo);
 
         // Outline down entity
         visualObjectTextureInfo.assetId = textures.outlineDownAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineDownEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineDownEntity, visualObjectTextureInfo);
+        cellComponent.outlineDownEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.outlineDownEntity, visualObjectTextureInfo);
 
         // Outline left entity
         visualObjectTextureInfo.assetId = textures.outlineLeftAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineLeftEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineLeftEntity, visualObjectTextureInfo);
+        cellComponent.outlineLeftEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.outlineLeftEntity, visualObjectTextureInfo);
 
         // Outline right entity
         visualObjectTextureInfo.assetId = textures.outlineRightAssetId;
         visualObjectCreateInfo.layerName = "CellOutline";
-        cellComponent.outlineRightEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.outlineRightEntity, visualObjectTextureInfo);
+        cellComponent.outlineRightEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.outlineRightEntity, visualObjectTextureInfo);
 
         // Moveable
         visualObjectTextureInfo.assetId = textures.moveableAssetId;
         visualObjectCreateInfo.layerName = "CellMoveable";
-        cellComponent.moveableEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.moveableEntity, visualObjectTextureInfo);
+        cellComponent.moveableEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.moveableEntity, visualObjectTextureInfo);
 
         // Selected
         visualObjectTextureInfo.assetId = textures.selectedAssetId;
         visualObjectCreateInfo.layerName = "CellSelected";
-        cellComponent.selectedEntity = RenderVisualObjectsECSUtils::create(visualObjectCreateInfo);
-        RenderVisualObjectsECSUtils::setTexture(cellComponent.selectedEntity, visualObjectTextureInfo);
+        cellComponent.selectedEntity = VisualObjectsUtils::create(visualObjectCreateInfo);
+        VisualObjectsUtils::setTexture(cellComponent.selectedEntity, visualObjectTextureInfo);
 
         return cellEntity;
     }
 
-    void CellsECSUtils::createCellsBlock(const sf::Vector2f& startPosition,
+    void CellsUtils::createCellsBlock(const sf::Vector2f& startPosition,
         CellComponent::Type startType, const sf::Vector2i& indexes, const CellsTextures& cellsTextures,
         const sf::Vector2i& size)
     {
@@ -82,7 +82,7 @@ namespace ECS
         createCellFn({ 1, 0 }, secondType);
     }
 
-    void CellsECSUtils::createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks,
+    void CellsUtils::createCells(const sf::Vector2f& startPosition, const sf::Vector2i& blocks,
         const CellsTextures& cellsTextures,
         const sf::Vector2i& size)
     {
@@ -106,25 +106,25 @@ namespace ECS
             auto view = registry.view<CellComponent>();
             view.each([&indexes](CellComponent& cellComponent) {
                 if (cellComponent.indexes.x == 0) {
-                    RenderVisualObjectsECSUtils::show(cellComponent.outlineLeftEntity);
+                    VisualObjectsUtils::show(cellComponent.outlineLeftEntity);
                 }
 
                 if (cellComponent.indexes.y == 0) {
-                    RenderVisualObjectsECSUtils::show(cellComponent.outlineTopEntity);
+                    VisualObjectsUtils::show(cellComponent.outlineTopEntity);
                 }
 
                 if (cellComponent.indexes.x == indexes.x) {
-                    RenderVisualObjectsECSUtils::show(cellComponent.outlineRightEntity);
+                    VisualObjectsUtils::show(cellComponent.outlineRightEntity);
                 }
 
                 if (cellComponent.indexes.y == indexes.y) {
-                    RenderVisualObjectsECSUtils::show(cellComponent.outlineDownEntity);
+                    VisualObjectsUtils::show(cellComponent.outlineDownEntity);
                 }
             });
         }
     }
 
-    entt::entity CellsECSUtils::getCellFromIndexes(const sf::Vector2i& indexes)
+    entt::entity CellsUtils::getCellFromIndexes(const sf::Vector2i& indexes)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
         auto view = registry.view<CellComponent>();

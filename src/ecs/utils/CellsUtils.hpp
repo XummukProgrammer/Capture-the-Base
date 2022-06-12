@@ -1,5 +1,5 @@
-#ifndef __CELLS_ECS_UTILS_INCLUDE_FILE__
-#define __CELLS_ECS_UTILS_INCLUDE_FILE__
+#ifndef __CELLS_UTILS_INCLUDE_FILE__
+#define __CELLS_UTILS_INCLUDE_FILE__
 
 #include <ecs/components/CellComponent.hpp>
 
@@ -7,7 +7,7 @@
 
 namespace ECS
 {
-    class CellsECSUtils final
+    class CellsUtils final
     {
     public:
         struct CellTextures
@@ -41,4 +41,4 @@ namespace ECS
     };
 }
 
-#endif // __CELLS_ECS_UTILS_INCLUDE_FILE__
+#endif // __CELLS_UTILS_INCLUDE_FILE__

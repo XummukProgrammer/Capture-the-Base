@@ -1,5 +1,5 @@
-#ifndef __CHIPS_ECS_UTILS_INCLUDE_FILE__
-#define __CHIPS_ECS_UTILS_INCLUDE_FILE__
+#ifndef __CHIPS_UTILS_INCLUDE_FILE__
+#define __CHIPS_UTILS_INCLUDE_FILE__
 
 #include <ecs/components/ChipComponent.hpp>
 
@@ -9,7 +9,7 @@
 
 namespace ECS
 {
-    class ChipsECSUtils final
+    class ChipsUtils final
     {
     public:
         static entt::entity createChip(ChipComponent::Type type, const sf::Vector2i& indexes, 
@@ -17,4 +17,4 @@ namespace ECS
     };
 }
 
-#endif // __CHIPS_ECS_UTILS_INCLUDE_FILE__
+#endif // __CHIPS_UTILS_INCLUDE_FILE__
