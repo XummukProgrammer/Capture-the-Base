@@ -16,12 +16,14 @@ set(GAME_HEADERS
 	src/ecs/components/TextureComponent.hpp
 	src/ecs/components/CellComponent.hpp
 	src/ecs/components/ChipComponent.hpp
+	src/ecs/components/TeamComponent.hpp
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
 	src/ecs/utils/VisualObjectsUtils.hpp
 	src/ecs/utils/CellsUtils.hpp
 	src/ecs/utils/ChipsUtils.hpp
+	src/ecs/utils/TeamsUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -46,12 +48,14 @@ set(GAME_SOURCES
 	src/ecs/components/TextureComponent.cpp
 	src/ecs/components/CellComponent.cpp
 	src/ecs/components/ChipComponent.cpp
+	src/ecs/components/TeamComponent.cpp
 	src/ecs/systems/System.cpp
 	src/ecs/systems/Systems.cpp
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
 	src/ecs/utils/VisualObjectsUtils.cpp
 	src/ecs/utils/CellsUtils.cpp
 	src/ecs/utils/ChipsUtils.cpp
+	src/ecs/utils/TeamsUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

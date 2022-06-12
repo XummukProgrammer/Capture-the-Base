@@ -7,6 +7,7 @@
 #include <ecs/ECSWorld.hpp>
 #include <ecs/utils/CellsUtils.hpp>
 #include <ecs/utils/ChipsUtils.hpp>
+#include <ecs/utils/TeamsUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 
 namespace Game
@@ -42,6 +43,7 @@ namespace Game
 
         ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 });
 
-        ECS::ChipsUtils::createChip(ECS::ChipComponent::Type::White, { 1, 0 }, "Chip_White", { 64, 64 });
+        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
+        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
     }
 }
