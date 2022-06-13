@@ -4,6 +4,7 @@
 #include <ecs/components/CellComponent.hpp>
 
 #include <string>
+#include <vector>
 
 namespace ECS
 {
@@ -46,6 +47,12 @@ namespace ECS
             const sf::Vector2i& size, const CellFonts& cellFonts);
 
         static entt::entity getCellFromIndexes(const sf::Vector2i& indexes);
+        static std::vector<entt::entity> getAvailableCellsFromIndexes(const sf::Vector2i& indexes);
+        static std::vector<entt::entity> getMoveableCellsFromIndexes(const sf::Vector2i& indexes);
+
+        static void setMoveableCell(entt::entity entity);
+        static void unsetMoveableCell(entt::entity entity);
+        static void unsetMoveableCells();
 
     private:
         static std::string getCellTextIndex(int maxY, int cellY);

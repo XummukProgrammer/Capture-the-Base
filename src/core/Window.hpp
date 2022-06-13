@@ -1,6 +1,8 @@
 #ifndef __WINDOW_INCLUDE_FILE__
 #define __WINDOW_INCLUDE_FILE__
 
+#include <SFML/System/Vector2.hpp>
+
 #include <string>
 #include <functional>
 
@@ -29,6 +31,9 @@ namespace Core
         void setOnDrawCallback(const DrawCallback& callback);
 
         void start();
+
+    public:
+        sf::Vector2i getMousePosition() const;
 
     private:
         void onUpdate(float deltaTime);

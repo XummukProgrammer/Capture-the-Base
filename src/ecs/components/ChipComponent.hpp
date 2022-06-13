@@ -16,6 +16,11 @@ namespace ECS
 
         sf::Vector2i indexes;
     };
+
+    struct ChipTargetComponent
+    {
+        bool _;
+    };
 }
 
 #endif // __CHIP_COMPONENT_INCLUDE_FILE__

@@ -29,6 +29,11 @@ namespace ECS
 
         sf::Vector2i indexes;
     };
+
+    struct CellMoveableComponent
+    {
+        bool _;
+    };
 }
 
 #endif // __CELL_COMPONENT_INCLUDE_FILE__

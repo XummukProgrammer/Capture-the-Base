@@ -14,6 +14,14 @@ namespace ECS
     public:
         static entt::entity createChip(ChipComponent::Type type, const sf::Vector2i& indexes, 
             const std::string& textureAssetId, const sf::Vector2i& size);
+        static entt::entity getChipFromIndexes(const sf::Vector2i& indexes);
+
+        static void setTargetChip(entt::entity entity);
+        static void unsetTargetChip(entt::entity entity);
+        static void unsetTargetChip();
+        static entt::entity getTargetChip();
+
+        static void moveChip(entt::entity entity, const sf::Vector2i& newIndexes);
     };
 }
 

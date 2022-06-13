@@ -54,9 +54,14 @@ namespace Core
         }
     }
 
+    sf::Vector2i Window::getMousePosition() const
+    {
+        return sf::Mouse::getPosition(*_wndPtr);
+    }
+
     void Window::onUpdate(float deltaTime)
     {
-        if (_onUpdateCallback) {
+        if (_onUpdateCallback && _wndPtr->hasFocus()) {
             _onUpdateCallback(deltaTime);
         }
     }

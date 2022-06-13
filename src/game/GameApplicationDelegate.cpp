@@ -11,6 +11,7 @@
 #include <ecs/utils/TextsUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 #include <ecs/systems/UpdateTextsSystem.hpp>
+#include <ecs/systems/InputSystem.hpp>
 
 namespace Game
 {
@@ -24,6 +25,7 @@ namespace Game
 
     void GameApplicationDelegate::onInitECSWorld(ECS::World* worldPtr)
     {
+        worldPtr->addSystem<ECS::InputSystem>();
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
         worldPtr->addSystem<ECS::UpdateTextsSystem>();
 

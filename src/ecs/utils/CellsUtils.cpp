@@ -5,6 +5,7 @@
 #include <ecs/ECSWorld.hpp>
 #include <ecs/utils/VisualObjectsUtils.hpp>
 #include <ecs/utils/TextsUtils.hpp>
+#include <ecs/utils/ChipsUtils.hpp>
 
 #include <fmt/format.h>
 
@@ -142,6 +143,87 @@ namespace ECS
         }
 
         return entt::null;
+    }
+
+    std::vector<entt::entity> CellsUtils::getAvailableCellsFromIndexes(const sf::Vector2i& indexes)
+    {
+        const std::vector<sf::Vector2i> availableIndexes = {
+            { indexes.x, indexes.y - 1 },
+            { indexes.x, indexes.y + 1 },
+            { indexes.x - 1, indexes.y },
+            { indexes.x + 1, indexes.y }
+        };
+        std::vector<entt::entity> entities;
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<CellComponent>();
+
+        view.each([availableIndexes, &entities](entt::entity entity, const CellComponent& cellComponent) {
+            for (const auto& indexes : availableIndexes) {
+                if (indexes == cellComponent.indexes) {
+                    entities.push_back(entity);
+                }
+            }
+        });
+
+        return entities;
+    }
+
+    std::vector<entt::entity> CellsUtils::getMoveableCellsFromIndexes(const sf::Vector2i& indexes)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        auto&& availableCells = getAvailableCellsFromIndexes(indexes);
+        std::vector<entt::entity> moveableCells;
+
+        for (const auto availableCell : availableCells) {
+            auto& cellComponent = registry.get<CellComponent>(availableCell);
+            auto availableChip = ChipsUtils::getChipFromIndexes(cellComponent.indexes);
+            if (!registry.valid(availableChip)) {
+                moveableCells.push_back(availableCell);
+            }
+        }
+
+        return moveableCells;
+    }
+
+    void CellsUtils::setMoveableCell(entt::entity entity)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        if (!registry.valid(entity)) {
+            return;
+        }
+
+        if (auto cellComponent = registry.try_get<CellComponent>(entity)) {
+            VisualObjectsUtils::show(cellComponent->moveableEntity);
+        }
+
+        registry.emplace_or_replace<CellMoveableComponent>(entity);
+    }
+
+    void CellsUtils::unsetMoveableCell(entt::entity entity)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        if (!registry.valid(entity)) {
+            return;
+        }
+
+        if (auto cellComponent = registry.try_get<CellComponent>(entity)) {
+            VisualObjectsUtils::hide(cellComponent->moveableEntity);
+        }
+
+        registry.remove<CellMoveableComponent>(entity);
+    }
+
+    void CellsUtils::unsetMoveableCells()
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<CellMoveableComponent>();
+
+        view.each([](entt::entity entity, const CellMoveableComponent&) {
+            unsetMoveableCell(entity);
+        });
     }
 
     std::string CellsUtils::getCellTextIndex(int maxY, int cellY)
