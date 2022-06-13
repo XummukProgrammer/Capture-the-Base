@@ -1,6 +1,7 @@
 #include "GameApplicationDelegate.hpp"
 
 #include <core/States.hpp>
+#include <core/Store.hpp>
 
 #include <game/GameState.hpp>
 
@@ -58,5 +59,15 @@ namespace Game
 
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
+    }
+
+    void GameApplicationDelegate::onInitStore(Core::Store* storePtr)
+    {
+        if (auto dataStore = storePtr->getDataStore(Core::Store::Type::Game)) {
+            dataStore->setBool("chipMoves", false);
+            dataStore->setBool("playerControl", true);
+            dataStore->setBool("win", false);
+            dataStore->setBool("lose", false);
+        }
     }
 }

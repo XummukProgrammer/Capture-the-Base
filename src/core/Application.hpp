@@ -36,7 +36,7 @@ namespace Core
         virtual void onInitStates(States* statesPtr) {}
         virtual void onInitRenderVisualObjects(VisualObjects* visualObjectsPtr) {}
         virtual void onInitECSWorld(ECS::World* worldPtr) {}
-        void onInitStore(Store* storePtr) {}
+        virtual void onInitStore(Store* storePtr) {}
 
         virtual void onUpdate(float deltaTime) {}
         virtual void onDraw(sf::RenderWindow* wndPtr) {}

@@ -3,6 +3,11 @@
 
 #include <core/State.hpp>
 
+namespace Core
+{
+    class DataStore;
+}
+
 namespace Game
 {
     class GameState final : public Core::State
@@ -12,7 +17,11 @@ namespace Game
         ~GameState() = default;
 
     public:
+        void onEnter() override;
         void onUpdate(float deltaTime) override;
+
+    private:
+        Core::DataStore* _gameDataStore = nullptr;
     };
 }
 

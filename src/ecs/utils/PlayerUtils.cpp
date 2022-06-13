@@ -2,6 +2,7 @@
 
 #include <core/Application.hpp>
 #include <core/Window.hpp>
+#include <core/Store.hpp>
 
 #include <ecs/ECSWorld.hpp>
 
@@ -48,6 +49,10 @@ namespace ECS
 
                 ChipsUtils::unsetTargetChip();
                 CellsUtils::unsetMoveableCells();
+
+                if (auto dataStore = Core::Application::getInstance().getStore()->getDataStore(Core::Store::Type::Game)) {
+                    dataStore->setBool("chipMoves", true);
+                }
             }
         });
     }

@@ -2,6 +2,19 @@
 
 namespace Core
 {
+    void DataStore::setBool(std::string_view id, bool value)
+    {
+        setVariable(id, Variable::Type::Bool, value);
+    }
+
+    bool DataStore::getBool(std::string_view id, bool defValue) const
+    {
+        if (auto valueOpt = getVariableValue<bool>(id, Variable::Type::Bool)) {
+            return valueOpt.value();
+        }
+        return defValue;
+    }
+
     void DataStore::setInt(std::string_view id, int value)
     {
         setVariable(id, Variable::Type::Int, value);

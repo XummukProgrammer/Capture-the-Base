@@ -14,6 +14,7 @@ namespace Game
     public:
         void onInitStates(Core::States* statesPtr) override;
         void onInitECSWorld(ECS::World* worldPtr) override;
+        void onInitStore(Core::Store* storePtr) override;
     };
 }
 

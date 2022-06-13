@@ -16,6 +16,7 @@ namespace Core
 		{
 			enum class Type
 			{
+				Bool,
 				Int,
 				Float,
 				String
@@ -32,6 +33,9 @@ namespace Core
 		~DataStore() = default;
 		
 	public:
+		void setBool(std::string_view id, bool value);
+		bool getBool(std::string_view id, bool defValue = false) const;
+
 		void setInt(std::string_view id, int value);
 		int getInt(std::string_view id, int defValue = 0) const;
 
