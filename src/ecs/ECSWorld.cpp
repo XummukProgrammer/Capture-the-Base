@@ -26,4 +26,9 @@ namespace ECS
     {
         _systemsPtr->onDraw(wndPtr);
     }
+
+    void World::onEvent(sf::Event* eventPtr)
+    {
+        _systemsPtr->onEvent(eventPtr);
+    }
 }

@@ -16,6 +16,7 @@ namespace ECS
     public:
         virtual void onUpdate(float deltaTime, entt::registry& registry) {}
         virtual void onDraw(entt::registry& registry, sf::RenderWindow* wndPtr) {}
+        virtual void onEvent(entt::registry& registry, sf::Event* eventPtr) {}
     };
 }
 

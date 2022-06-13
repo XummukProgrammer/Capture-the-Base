@@ -33,6 +33,7 @@ set(GAME_HEADERS
 	src/ecs/utils/ChipsUtils.hpp
 	src/ecs/utils/TeamsUtils.hpp
 	src/ecs/utils/TextsUtils.hpp
+	src/ecs/utils/PlayerUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -64,6 +65,7 @@ set(GAME_SOURCES
 	src/ecs/utils/ChipsUtils.cpp
 	src/ecs/utils/TeamsUtils.cpp
 	src/ecs/utils/TextsUtils.cpp
+	src/ecs/utils/PlayerUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

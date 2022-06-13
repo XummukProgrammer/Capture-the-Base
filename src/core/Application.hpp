@@ -6,6 +6,7 @@
 namespace sf
 {
     class RenderWindow;
+    class Event;
 }
 
 namespace ECS
@@ -93,6 +94,7 @@ namespace Core
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
+        void onEvent(sf::Event* eventPtr);
 
     private:
         Window* _wndPtr = nullptr;

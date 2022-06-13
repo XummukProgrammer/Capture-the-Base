@@ -22,6 +22,7 @@ namespace ECS
 
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
+        void onEvent(sf::Event* eventPtr);
 
     private:
         std::list<SystemPtr> _systems;

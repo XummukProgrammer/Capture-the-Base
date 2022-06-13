@@ -26,6 +26,11 @@ namespace Core
         _onDrawCallback = callback;
     }
 
+    void Window::setOnEventCallback(const EventCallback& callback)
+    {
+        _onEventCallback = callback;
+    }
+
     void Window::start()
     {
         if (!_wndPtr) {
@@ -43,6 +48,10 @@ namespace Core
             while (_wndPtr->pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
                     _wndPtr->close();
+                } else {
+                    if (_onEventCallback) {
+                        _onEventCallback(&event);
+                    }
                 }
             }
 

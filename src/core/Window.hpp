@@ -9,6 +9,7 @@
 namespace sf
 {
     class RenderWindow;
+    class Event;
 }
 
 namespace Core
@@ -17,7 +18,8 @@ namespace Core
     {
     public:
         using UpdateCallback = std::function<void(float)>;
-        using DrawCallback = std::function<void(sf::RenderWindow* window)>;
+        using DrawCallback = std::function<void(sf::RenderWindow*)>;
+        using EventCallback = std::function<void(sf::Event*)>;
 
     public:
         Window() = default;
@@ -29,6 +31,7 @@ namespace Core
 
         void setOnUpdateCallback(const UpdateCallback& callback);
         void setOnDrawCallback(const DrawCallback& callback);
+        void setOnEventCallback(const EventCallback& callback);
 
         void start();
 
@@ -43,6 +46,7 @@ namespace Core
         sf::RenderWindow* _wndPtr = nullptr;
         UpdateCallback _onUpdateCallback;
         DrawCallback _onDrawCallback;
+        EventCallback _onEventCallback;
     };
 }
 

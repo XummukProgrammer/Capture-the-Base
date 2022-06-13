@@ -75,6 +75,7 @@ namespace Core
         _wndPtr->create("Capture the Base", 800, 600, 60);
         _wndPtr->setOnUpdateCallback(std::bind(&Application::onUpdate, this, std::placeholders::_1));
         _wndPtr->setOnDrawCallback(std::bind(&Application::onDraw, this, std::placeholders::_1));
+        _wndPtr->setOnEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
         getDelegate()->onInitWindow(_wndPtr);
 
@@ -160,6 +161,11 @@ namespace Core
         _ecsWorldPtr->onDraw(wndPtr);
 
         getDelegate()->onDraw(wndPtr);
+    }
+
+    void Application::onEvent(sf::Event* eventPtr)
+    {
+        _ecsWorldPtr->onEvent(eventPtr);
     }
 
     std::string Application::buildPath(std::string_view filePath) const

@@ -12,11 +12,7 @@ namespace ECS
         ~InputSystem() = default;
 
     public:
-        void onUpdate(float deltaTime, entt::registry& registry) override;
-
-    private:
-        // TODO: Remove on create AI system
-        float _mouseClickTimerDelay = 0.f;
+        void onEvent(entt::registry& registry, sf::Event* eventPtr) override;
     };
 }
 

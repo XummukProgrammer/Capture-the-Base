@@ -28,4 +28,13 @@ namespace ECS
             systemPtr->onDraw(registry, wndPtr);
         }
     }
+
+    void Systems::onEvent(sf::Event* eventPtr)
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+
+        for (auto& systemPtr : _systems) {
+            systemPtr->onEvent(registry, eventPtr);
+        }
+    }
 }

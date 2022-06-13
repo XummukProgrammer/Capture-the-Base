@@ -24,6 +24,7 @@ namespace ECS
     public:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
+        void onEvent(sf::Event* eventPtr);
 
     private:
         entt::registry _registry;
