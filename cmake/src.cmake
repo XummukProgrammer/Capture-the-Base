@@ -27,6 +27,7 @@ set(GAME_HEADERS
 	src/ecs/systems/UpdateVisualObjectsSystem.hpp
 	src/ecs/systems/UpdateTextsSystem.hpp
 	src/ecs/systems/InputSystem.hpp
+	src/ecs/systems/BaseSystem.hpp
 	
 	src/ecs/utils/VisualObjectsUtils.hpp
 	src/ecs/utils/CellsUtils.hpp
@@ -34,6 +35,7 @@ set(GAME_HEADERS
 	src/ecs/utils/TeamsUtils.hpp
 	src/ecs/utils/TextsUtils.hpp
 	src/ecs/utils/PlayerUtils.hpp
+	src/ecs/utils/BaseUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -59,6 +61,7 @@ set(GAME_SOURCES
 	src/ecs/systems/UpdateVisualObjectsSystem.cpp
 	src/ecs/systems/UpdateTextsSystem.cpp
 	src/ecs/systems/InputSystem.cpp
+	src/ecs/systems/BaseSystem.cpp
 	
 	src/ecs/utils/VisualObjectsUtils.cpp
 	src/ecs/utils/CellsUtils.cpp
@@ -66,6 +69,7 @@ set(GAME_SOURCES
 	src/ecs/utils/TeamsUtils.cpp
 	src/ecs/utils/TextsUtils.cpp
 	src/ecs/utils/PlayerUtils.cpp
+	src/ecs/utils/BaseUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

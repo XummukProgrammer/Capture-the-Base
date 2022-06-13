@@ -2,6 +2,7 @@
 
 #include "CellsUtils.hpp"
 #include <ecs/utils/VisualObjectsUtils.hpp>
+#include <ecs/utils/BaseUtils.hpp>
 
 #include <core/Application.hpp>
 
@@ -24,6 +25,7 @@ namespace ECS
                 if (auto transformComponent = registry.try_get<TransformComponent>(cellEntity)) {
                     position = transformComponent->position;
                 }
+                BaseUtils::setBase(cellEntity, type);
             }
         }
 

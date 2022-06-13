@@ -21,6 +21,11 @@ namespace ECS
     {
         bool _;
     };
+
+    struct ChipBaseComponent
+    {
+        ChipComponent::Type type;
+    };
 }
 
 #endif // __CHIP_COMPONENT_INCLUDE_FILE__

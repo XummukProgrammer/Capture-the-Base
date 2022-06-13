@@ -12,6 +12,7 @@
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 #include <ecs/systems/UpdateTextsSystem.hpp>
 #include <ecs/systems/InputSystem.hpp>
+#include <ecs/systems/BaseSystem.hpp>
 
 namespace Game
 {
@@ -28,6 +29,7 @@ namespace Game
         worldPtr->addSystem<ECS::InputSystem>();
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
         worldPtr->addSystem<ECS::UpdateTextsSystem>();
+        worldPtr->addSystem<ECS::BaseSystem>();
 
         ECS::CellsUtils::CellsTextures cellsTextures;
         cellsTextures.whiteCellTextures.baseAssetId = "Cell_White";
@@ -54,7 +56,9 @@ namespace Game
 
         ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 }, cellFonts);
 
-        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
+        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 1, 1 });
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
+
+        ECS::ChipsUtils::moveChip(ECS::ChipsUtils::getChipFromIndexes({ 0, 0 }), { 0, 3 });
     }
 }
