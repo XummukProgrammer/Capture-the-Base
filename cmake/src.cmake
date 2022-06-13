@@ -9,6 +9,8 @@ set(GAME_HEADERS
 	src/core/States.hpp
 	src/core/VisualObject.hpp
 	src/core/Window.hpp
+	src/core/Store.hpp
+	src/core/DataStore.hpp
 	
 	src/ecs/ECSWorld.hpp
 	
@@ -53,6 +55,8 @@ set(GAME_SOURCES
 	src/core/States.cpp
 	src/core/VisualObject.cpp
 	src/core/Window.cpp
+	src/core/Store.cpp
+	src/core/DataStore.cpp
 	
 	src/ecs/ECSWorld.cpp
 	

@@ -5,6 +5,7 @@
 #include "Factory.hpp"
 #include "States.hpp"
 #include "VisualObjects.hpp"
+#include "Store.hpp"
 
 #include <ecs/ECSWorld.hpp>
 
@@ -21,8 +22,8 @@ namespace Core
         , _statesPtr(new States)
         , _visualObjectsPtr(new VisualObjects)
         , _ecsWorldPtr(new ECS::World)
+        , _storePtr(new Store)
     {
-
     }
 
     Application& Application::getInstance()
@@ -42,6 +43,7 @@ namespace Core
     {
         initExecuteDir(argc, argv);
         initFactory();
+        initStore();
         initAssets();
         initRenderVisualObjects();
         initWindow();
@@ -55,8 +57,9 @@ namespace Core
         destroyRenderVisualObjects();
         destroyWindow();
         destroyAssets();
-        destroyFactory();
         destroyStates();
+        destroyStore();
+        destroyFactory();
     }
 
     void Application::start()
@@ -146,6 +149,18 @@ namespace Core
         delete _ecsWorldPtr;
     }
 
+    void Application::initStore()
+    {
+        _storePtr->create();
+
+        getDelegate()->onInitStore(_storePtr);
+    }
+
+    void Application::destroyStore()
+    {
+        delete _storePtr;
+    }
+
     void Application::onUpdate(float deltaTime)
     {
         _statesPtr->onUpdate(deltaTime);
@@ -166,6 +181,8 @@ namespace Core
     void Application::onEvent(sf::Event* eventPtr)
     {
         _ecsWorldPtr->onEvent(eventPtr);
+
+        getDelegate()->onEvent(eventPtr);
     }
 
     std::string Application::buildPath(std::string_view filePath) const
@@ -206,6 +223,11 @@ namespace Core
     ECS::World* Application::getECSWorld() const
     {
         return _ecsWorldPtr;
+    }
+
+    Store* Application::getStore() const
+    {
+        return _storePtr;
     }
 
     const std::string& Application::getExecuteDir() const

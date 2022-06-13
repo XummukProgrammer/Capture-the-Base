@@ -21,6 +21,7 @@ namespace Core
     class Factory;
     class States;
     class VisualObjects;
+    class Store;
 
     class ApplicationDelegate
     {
@@ -35,9 +36,11 @@ namespace Core
         virtual void onInitStates(States* statesPtr) {}
         virtual void onInitRenderVisualObjects(VisualObjects* visualObjectsPtr) {}
         virtual void onInitECSWorld(ECS::World* worldPtr) {}
+        void onInitStore(Store* storePtr) {}
 
         virtual void onUpdate(float deltaTime) {}
         virtual void onDraw(sf::RenderWindow* wndPtr) {}
+        virtual void onEvent(sf::Event* eventPtr) {}
     };
 
     class Application final
@@ -63,6 +66,7 @@ namespace Core
         States* getStates() const;
         VisualObjects* getVisualObjects() const;
         ECS::World* getECSWorld() const;
+        Store* getStore() const;
         const std::string& getExecuteDir() const;
 
     private:
@@ -91,6 +95,9 @@ namespace Core
         void initECSWorld();
         void destroyECSWorld();
 
+        void initStore();
+        void destroyStore();
+
     private:
         void onUpdate(float deltaTime);
         void onDraw(sf::RenderWindow* wndPtr);
@@ -103,6 +110,7 @@ namespace Core
         States* _statesPtr = nullptr;
         VisualObjects* _visualObjectsPtr = nullptr;
         ECS::World* _ecsWorldPtr = nullptr;
+        Store* _storePtr = nullptr;
         std::string _executeDir;
     };
 }
