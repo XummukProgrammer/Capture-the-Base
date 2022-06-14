@@ -14,6 +14,7 @@
 #include <ecs/systems/UpdateTextsSystem.hpp>
 #include <ecs/systems/InputSystem.hpp>
 #include <ecs/systems/BaseSystem.hpp>
+#include <ecs/systems/AISystem.hpp>
 
 namespace Game
 {
@@ -31,6 +32,7 @@ namespace Game
         worldPtr->addSystem<ECS::UpdateVisualObjectsSystem>();
         worldPtr->addSystem<ECS::UpdateTextsSystem>();
         worldPtr->addSystem<ECS::BaseSystem>();
+        worldPtr->addSystem<ECS::AISystem>();
 
         ECS::CellsUtils::CellsTextures cellsTextures;
         cellsTextures.whiteCellTextures.baseAssetId = "Cell_White";
@@ -57,8 +59,8 @@ namespace Game
 
         ECS::CellsUtils::createCells({ 50.f, 50.f }, { 4, 8 }, cellsTextures, { 64, 64 }, cellFonts);
 
-        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 });
-        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 });
+        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 }, true);
+        ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 }, false);
     }
 
     void GameApplicationDelegate::onInitStore(Core::Store* storePtr)

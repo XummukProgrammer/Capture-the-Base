@@ -5,6 +5,8 @@
 
 #include <entt/entt.hpp>
 
+#include <vector>
+
 namespace ECS
 {
     class BaseUtils final
@@ -12,6 +14,8 @@ namespace ECS
     public:
         static void setBase(entt::entity entity, ChipComponent::Type type);
         static void unsetBase(entt::entity entity);
+
+        static std::vector<entt::entity> getBaseEntities(ChipComponent::Type type);
 
         static bool isBaseCaptured(ChipComponent::Type type);
     };

@@ -12,7 +12,7 @@ namespace ECS
     void InputSystem::onEvent(entt::registry& registry, sf::Event* eventPtr)
     {
         if (auto dataStore = Core::Application::getInstance().getStore()->getDataStore(Core::Store::Type::Game)) {
-            if (!dataStore->getBool("playerControl")) {
+            if (!dataStore->getBool("playerControl") || dataStore->getBool("chipMoves")) {
                 return;
             }
         }

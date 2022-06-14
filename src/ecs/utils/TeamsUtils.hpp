@@ -9,7 +9,7 @@ namespace ECS
     {
     public:
         static void createTeam(ChipComponent::Type type, const std::string& textureAssetId, const sf::Vector2i& size, 
-            const sf::Vector2i& startIndexes, const sf::Vector2i& blocks);
+            const sf::Vector2i& startIndexes, const sf::Vector2i& blocks, bool isEnemy);
     };
 }
 

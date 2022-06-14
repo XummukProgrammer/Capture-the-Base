@@ -3,6 +3,7 @@
 #include "CellsUtils.hpp"
 #include <ecs/utils/VisualObjectsUtils.hpp>
 #include <ecs/utils/BaseUtils.hpp>
+#include <ecs/utils/AIUtils.hpp>
 
 #include <core/Application.hpp>
 
@@ -14,7 +15,7 @@
 namespace ECS
 {
     entt::entity ChipsUtils::createChip(ChipComponent::Type type, const sf::Vector2i& indexes,
-        const std::string& textureAssetId, const sf::Vector2i& size)
+        const std::string& textureAssetId, const sf::Vector2i& size, bool isEnemy)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -40,6 +41,8 @@ namespace ECS
         auto& chipComponent = registry.emplace<ChipComponent>(entity);
         chipComponent.type = type;
         chipComponent.indexes = indexes;
+
+        AIUtils::setAI(entity);
 
         return entity;
     }
@@ -124,5 +127,13 @@ namespace ECS
         }
 
         registry.emplace_or_replace<UpdateVisualObjectComponent>(entity);
+    }
+
+    ChipComponent::Type ChipsUtils::reverseType(ChipComponent::Type type)
+    {
+        if (type == ChipComponent::Type::White) {
+            return ChipComponent::Type::Black;
+        }
+        return ChipComponent::Type::White;
     }
 }

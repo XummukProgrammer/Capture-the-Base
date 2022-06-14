@@ -19,10 +19,8 @@ set(GAME_HEADERS
 	src/ecs/components/TextureComponent.hpp
 	src/ecs/components/CellComponent.hpp
 	src/ecs/components/ChipComponent.hpp
-	src/ecs/components/ChipTargetComponent.hpp
-	src/ecs/components/TeamComponent.hpp
 	src/ecs/components/TextComponent.hpp
-	src/ecs/components/InputEventComponent.hpp
+	src/ecs/components/AIComponent.hpp
 	
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp
@@ -30,6 +28,7 @@ set(GAME_HEADERS
 	src/ecs/systems/UpdateTextsSystem.hpp
 	src/ecs/systems/InputSystem.hpp
 	src/ecs/systems/BaseSystem.hpp
+	src/ecs/systems/AISystem.hpp
 	
 	src/ecs/utils/VisualObjectsUtils.hpp
 	src/ecs/utils/CellsUtils.hpp
@@ -38,6 +37,7 @@ set(GAME_HEADERS
 	src/ecs/utils/TextsUtils.hpp
 	src/ecs/utils/PlayerUtils.hpp
 	src/ecs/utils/BaseUtils.hpp
+	src/ecs/utils/AIUtils.hpp
 	
 	src/game/GameApplicationDelegate.hpp
 	src/game/GameState.hpp
@@ -66,6 +66,7 @@ set(GAME_SOURCES
 	src/ecs/systems/UpdateTextsSystem.cpp
 	src/ecs/systems/InputSystem.cpp
 	src/ecs/systems/BaseSystem.cpp
+	src/ecs/systems/AISystem.cpp
 	
 	src/ecs/utils/VisualObjectsUtils.cpp
 	src/ecs/utils/CellsUtils.cpp
@@ -74,6 +75,7 @@ set(GAME_SOURCES
 	src/ecs/utils/TextsUtils.cpp
 	src/ecs/utils/PlayerUtils.cpp
 	src/ecs/utils/BaseUtils.cpp
+	src/ecs/utils/AIUtils.cpp
 	
 	src/game/GameApplicationDelegate.cpp
 	src/game/GameState.cpp

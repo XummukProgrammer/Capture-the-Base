@@ -1,8 +1,0 @@
-#ifndef __TEAM_COMPONENT_INCLUDE_FILE__
-#define __TEAM_COMPONENT_INCLUDE_FILE__
-
-namespace ECS
-{
-}
-
-#endif // __TEAM_COMPONENT_INCLUDE_FILE__

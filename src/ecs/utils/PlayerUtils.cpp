@@ -8,7 +8,6 @@
 
 #include <ecs/components/ChipComponent.hpp>
 #include <ecs/components/VisualObjectComponent.hpp>
-#include <ecs/components/ChipTargetComponent.hpp>
 #include <ecs/components/CellComponent.hpp>
 
 #include <ecs/utils/CellsUtils.hpp>

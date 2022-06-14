@@ -32,6 +32,21 @@ namespace ECS
         registry.remove<ChipBaseComponent>(entity);
     }
 
+    std::vector<entt::entity> BaseUtils::getBaseEntities(ChipComponent::Type type)
+    {
+        std::vector<entt::entity> entities;
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<ChipBaseComponent>();
+
+        view.each([&entities, type](entt::entity entity, const ChipBaseComponent& chipBaseComponent) {
+            if (chipBaseComponent.type == type) {
+                entities.push_back(entity);
+            }
+        });
+
+        return entities;
+    }
+
     bool BaseUtils::isBaseCaptured(ChipComponent::Type type)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
