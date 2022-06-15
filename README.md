@@ -15,6 +15,7 @@
 
 # Сборка проекта
 - git clone git@github.com:XummukProgrammer/Capture-the-Base.git
+- cd Capture-the-Base
 - git submodule update --init --recursive
 - md build
 - cd build
