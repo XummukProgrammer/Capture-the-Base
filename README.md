@@ -13,6 +13,11 @@
 - fmt - библиотека для формирование строк;
 - pugixml - библиотека для загрузка XML.
 
+# Подключение SFML
+- Скачать с офф. сайта: https://www.sfml-dev.org/download/sfml/2.5.1/
+- Загрузить, например на диск С
+- Добавляем переменную среды (в системные переменные): ключ - SFML_DIR, значение - например если путь до корня SFML это D:\Libs\SFML-2.5.1, то устанавливаем D:\Libs\SFML-2.5.1\lib\cmake
+
 # Сборка проекта
 - git clone git@github.com:XummukProgrammer/Capture-the-Base.git
 - cd Capture-the-Base
