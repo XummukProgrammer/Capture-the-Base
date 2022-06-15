@@ -54,11 +54,15 @@ namespace ECS
         auto enemyChipType = ChipsUtils::reverseType(chipComponent->type);
         const auto& chipBaseEntities = BaseUtils::getBaseEntities(enemyChipType);
 
-        // TODO: Choice normal entity
-        auto chipBaseEntity = chipBaseEntities[0];
-        auto baseCellComponent = registry.try_get<CellComponent>(chipBaseEntity);
-        const auto& chipBaseEndexes = baseCellComponent->indexes;
-
+        sf::Vector2i chipBaseEndexes;
+        {
+            auto chipBaseEntity = chipBaseEntities[0];
+            auto& baseComponent = registry.get<ChipBaseComponent>(chipBaseEntity);
+            sf::Vector2i baseStartIndexes = baseComponent.startIndexes;
+            
+            chipBaseEndexes = { chipIndexes.x + baseStartIndexes.x, chipIndexes.y + baseStartIndexes.y };
+        }
+        
         std::vector<sf::Vector2i> path;
 
         sf::Vector2i point = chipIndexes;
@@ -93,6 +97,16 @@ namespace ECS
         }
     }
 
+    void AIUtils::generatePaths()
+    {
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<AIComponent>();
+
+        view.each([](entt::entity entity, const AIComponent&) {
+            generatePath(entity);
+        });
+    }
+
     void AIUtils::moveFromPath(entt::entity entity)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
@@ -114,5 +128,22 @@ namespace ECS
         aiComponent->pathQueue.pop();
 
         ChipsUtils::moveChip(entity, pathIndexes);
+    }
+
+    std::vector<entt::entity> AIUtils::getMoveableEntities()
+    {
+        std::vector<entt::entity> entities;
+        auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
+        auto view = registry.view<AIComponent>();
+
+        view.each([&registry, &entities](entt::entity entity, const AIComponent& aiComponent) {
+            const auto& toIndexes = aiComponent.pathQueue.front();
+            auto chipEntityWithToIndexes = ChipsUtils::getChipFromIndexes(toIndexes);
+            if (!registry.valid(chipEntityWithToIndexes)) {
+                entities.push_back(entity);
+            }
+        });
+
+        return entities;
     }
 }

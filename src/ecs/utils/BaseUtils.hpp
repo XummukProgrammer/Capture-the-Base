@@ -12,7 +12,7 @@ namespace ECS
     class BaseUtils final
     {
     public:
-        static void setBase(entt::entity entity, ChipComponent::Type type);
+        static void setBase(entt::entity entity, ChipComponent::Type type, const sf::Vector2i& startIndexes);
         static void unsetBase(entt::entity entity);
 
         static std::vector<entt::entity> getBaseEntities(ChipComponent::Type type);

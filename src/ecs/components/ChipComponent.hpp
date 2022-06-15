@@ -2,6 +2,7 @@
 #define __CHIP_COMPONENT_INCLUDE_FILE__
 
 #include <SFML/Graphics.hpp>
+#include <entt/entt.hpp>
 
 namespace ECS
 {
@@ -25,6 +26,7 @@ namespace ECS
     struct ChipBaseComponent
     {
         ChipComponent::Type type;
+        sf::Vector2i startIndexes;
     };
 }
 

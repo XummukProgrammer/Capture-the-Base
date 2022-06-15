@@ -3,6 +3,8 @@
 
 #include <entt/entt.hpp>
 
+#include <vector>
+
 namespace ECS
 {
     class AIUtils final
@@ -12,8 +14,11 @@ namespace ECS
         static void unsetAI(entt::entity entity);
 
         static void generatePath(entt::entity entity);
+        static void generatePaths();
 
         static void moveFromPath(entt::entity entity);
+
+        static std::vector<entt::entity> getMoveableEntities();
     };
 }
 

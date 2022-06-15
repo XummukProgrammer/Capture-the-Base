@@ -21,6 +21,7 @@ set(GAME_HEADERS
 	src/ecs/components/ChipComponent.hpp
 	src/ecs/components/TextComponent.hpp
 	src/ecs/components/AIComponent.hpp
+	src/ecs/components/TeamComponent.hpp
 	
 	src/ecs/systems/System.hpp
 	src/ecs/systems/Systems.hpp

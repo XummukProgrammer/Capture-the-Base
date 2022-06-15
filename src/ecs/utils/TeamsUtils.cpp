@@ -12,7 +12,7 @@ namespace ECS
 
         for (int y = startIndexes.y; y < endY; ++y) {
             for (int x = startIndexes.x; x < endX; ++x) {
-                ChipsUtils::createChip(type, { x, y }, textureAssetId, size, isEnemy);
+                ChipsUtils::createChip(type, { x, y }, startIndexes, textureAssetId, size, isEnemy);
             }
         }
     }

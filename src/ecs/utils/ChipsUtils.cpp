@@ -14,7 +14,7 @@
 
 namespace ECS
 {
-    entt::entity ChipsUtils::createChip(ChipComponent::Type type, const sf::Vector2i& indexes,
+    entt::entity ChipsUtils::createChip(ChipComponent::Type type, const sf::Vector2i& indexes, const sf::Vector2i& startIndexes,
         const std::string& textureAssetId, const sf::Vector2i& size, bool isEnemy)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
@@ -26,7 +26,7 @@ namespace ECS
                 if (auto transformComponent = registry.try_get<TransformComponent>(cellEntity)) {
                     position = transformComponent->position;
                 }
-                BaseUtils::setBase(cellEntity, type);
+                BaseUtils::setBase(cellEntity, type, startIndexes);
             }
         }
 
@@ -42,8 +42,10 @@ namespace ECS
         chipComponent.type = type;
         chipComponent.indexes = indexes;
 
-        AIUtils::setAI(entity);
-
+        if (isEnemy) {
+            AIUtils::setAI(entity);
+        }
+        
         return entity;
     }
 

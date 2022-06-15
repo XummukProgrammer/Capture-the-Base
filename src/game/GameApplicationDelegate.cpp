@@ -10,6 +10,7 @@
 #include <ecs/utils/ChipsUtils.hpp>
 #include <ecs/utils/TeamsUtils.hpp>
 #include <ecs/utils/TextsUtils.hpp>
+#include <ecs/utils/AIUtils.hpp>
 #include <ecs/systems/UpdateVisualObjectsSystem.hpp>
 #include <ecs/systems/UpdateTextsSystem.hpp>
 #include <ecs/systems/InputSystem.hpp>
@@ -61,6 +62,8 @@ namespace Game
 
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::Black, "Chip_Black", { 64, 64 }, { 0, 0 }, { 3, 3 }, true);
         ECS::TeamsUtils::createTeam(ECS::ChipComponent::Type::White, "Chip_White", { 64, 64 }, { 5, 5 }, { 3, 3 }, false);
+
+        ECS::AIUtils::generatePaths();
     }
 
     void GameApplicationDelegate::onInitStore(Core::Store* storePtr)

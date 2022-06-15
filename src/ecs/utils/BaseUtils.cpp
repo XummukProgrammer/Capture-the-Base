@@ -9,7 +9,7 @@
 
 namespace ECS
 {
-    void BaseUtils::setBase(entt::entity entity, ChipComponent::Type type)
+    void BaseUtils::setBase(entt::entity entity, ChipComponent::Type type, const sf::Vector2i& startIndexes)
     {
         auto& registry = Core::Application::getInstance().getECSWorld()->getRegistry();
 
@@ -19,6 +19,7 @@ namespace ECS
 
         auto& chipBaseComponent = registry.emplace_or_replace<ChipBaseComponent>(entity);
         chipBaseComponent.type = type;
+        chipBaseComponent.startIndexes = startIndexes;
     }
 
     void BaseUtils::unsetBase(entt::entity entity)

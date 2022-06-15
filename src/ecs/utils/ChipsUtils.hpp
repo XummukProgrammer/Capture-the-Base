@@ -12,7 +12,7 @@ namespace ECS
     class ChipsUtils final
     {
     public:
-        static entt::entity createChip(ChipComponent::Type type, const sf::Vector2i& indexes, 
+        static entt::entity createChip(ChipComponent::Type type, const sf::Vector2i& indexes, const sf::Vector2i& startIndexes, 
             const std::string& textureAssetId, const sf::Vector2i& size, bool isEnemy);
         static entt::entity getChipFromIndexes(const sf::Vector2i& indexes);
 
